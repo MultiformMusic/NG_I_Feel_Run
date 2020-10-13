@@ -21,7 +21,7 @@
 
 }
 .appli {
-  color: rgb(187, 174, 174);
+  color: rgb(212, 61, 61);
 }
 
 .intro {
@@ -77,7 +77,7 @@
 }
 
 
-@media (max-width: 420px) {
+@media (max-width: 600px) {
 
   #fly-in {
     margin: 25vh auto;
@@ -86,18 +86,21 @@
 
   #fly-in span {
     left: 10vw;
-    margin-top: 10rem;
+    margin-top: 5rem;
     font-size: .4em;
-  }
-
-  .appli {
-    color: #fff;
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 380px) {
   
   #fly-in {
-    margin: 18vh auto;
+    margin: 20vh auto;
+  }
+
+
+  #fly-in span {
+    left: 10vw;
+    margin-top: 10rem;
+    font-size: .4em;
   }
 }
