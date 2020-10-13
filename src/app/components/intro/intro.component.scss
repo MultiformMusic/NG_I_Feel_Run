@@ -21,7 +21,7 @@
 
 }
 .appli {
-  color: #fff;
+  color: rgb(187, 174, 174);
 }
 
 .intro {
@@ -30,7 +30,7 @@
 }
 
 #fly-in {
-  font-size: 4em;
+  font-size: 7em;
   margin: 40vh auto;
   height: 20vh; 
   align-items: center;
@@ -38,13 +38,12 @@
 
 #fly-in span {
   display: block;
-  font-size: .4em;
+  font-size: .3em;
   opacity: .8;
 }
 
 #fly-in div {
   position: fixed; 
-  // margin: 2vh 0;
   opacity: 0;
   left: 10vw;
   width: 80vw;
@@ -53,11 +52,10 @@
   
 #fly-in span {
   position: fixed; 
-  // margin: 2vh 0;
   opacity: 0;
-  left: 10vw;
+  left: 16vw;
   width: 80vw;
-  margin-top: 4rem;
+  margin-top: 7rem;
   animation: switch 32s linear infinite;
 }
   
@@ -83,10 +81,17 @@
 
   #fly-in {
     margin: 25vh auto;
+    font-size: 4em;
   }
 
   #fly-in span {
+    left: 10vw;
     margin-top: 10rem;
+    font-size: .4em;
+  }
+
+  .appli {
+    color: #fff;
   }
 }
 
