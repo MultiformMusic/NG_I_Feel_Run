@@ -7,6 +7,8 @@ import { StoreModule } from '@ngrx/store';
 import { IntroComponent } from './components/intro/intro.component';
 import { TestComponent } from './components/test/test.component';
 
+import { reducers } from './app.reducer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,7 @@ import { TestComponent } from './components/test/test.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot(reducers)
   ],
   providers: [],
   bootstrap: [AppComponent]
