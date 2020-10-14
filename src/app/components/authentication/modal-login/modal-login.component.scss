@@ -1,4 +1,6 @@
 .modal {
+    -webkit-overflow-scrolling: auto !important;
+    overflow-y: auto !important;
     transition: all 0.4s;  
 }
 
@@ -9,12 +11,20 @@
 
 .modal-content {
     background-color: #eee;
+    max-height: 500px;
+    overflow: scroll;
 }
 
 .modal-login-explanation {
     color: rgb(57, 109, 57);
     font-size: 1rem;
+    padding: 10px;
+    background-color: rgb(231, 224, 224);
 }
+
+.modal-wide .modal-body {
+    overflow-y: scroll;
+  }
 
 .callCloudFunctionMessage {
     color: rgb(150, 115, 0);
