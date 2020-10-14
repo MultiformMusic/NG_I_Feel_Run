@@ -2,4 +2,13 @@ export const TEXT_LOCALIZATION = {
 
     intro_FR: 'Le site de votre application de running',
     intro_EN: 'Your running application site',
+    modalLoginExplanation_FR: 'Pour vous connecter vous devez préalablement avoir créer un compte via l\'application ios ou android',
+    modalLoginExplanation_EN: 'To connect you must first have created an account via the ios or android application',
+    modalEmailPassword_FR: 'Entrez vos email / mot de passe',
+    modalEmailPassword_EN: 'Enter your email / password',
+    email_FR: 'email',
+    email_EN: 'email',
+    password_FR: 'mot de passe',
+    password_EN: 'password',
+
 }

@@ -18,12 +18,11 @@ export class IntroComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.store.select(fromRoot.getLanguage).subscribe(
-      (language: string) => {
-        console.log(language)
-        this.intro = getLocalizeText(language, 'intro');
-      }
-    );
+    // this.store.select(fromRoot.getLanguage).subscribe(
+    //   (language: string) => {
+    //     this.intro = getLocalizeText(language, 'intro');
+    //   }
+    // );
 
     setTimeout(() => {
       this.router.navigate(['home']);

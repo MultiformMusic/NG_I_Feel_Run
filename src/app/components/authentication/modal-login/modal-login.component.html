@@ -3,7 +3,14 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Enter your email / password</h4>
+          <div style="flex-direction: column;">
+            <p class="modal-login-explanation">
+              <app-localized-text text="modalLoginExplanation"></app-localized-text>
+            </p>
+            <h4 class="modal-title" style="margin-top: 1rem;">
+              <app-localized-text text="modalEmailPassword"></app-localized-text>
+            </h4>
+          </div>
           <button (click)="closeModal()" type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
@@ -14,7 +21,7 @@
             <input type="email" 
                    class="form-control mb-3"
                    maxlength="40"
-                   placeholder="email"
+                   [appPlaceholder]="'email'"
                    formControlName="email"
                    (keydown)="onKeydown($event)">
 
@@ -27,7 +34,7 @@
               <input type="password"
                      class="form-control mb-3"
                      maxlength="40"
-                     placeholder="password"
+                     [appPlaceholder]="'password'"
                      formControlName="password"
                      (keydown)="onKeydown($event)">
 

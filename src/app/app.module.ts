@@ -8,15 +8,19 @@ import { StoreModule } from '@ngrx/store';
 import { IntroComponent } from './components/intro/intro.component';
 
 import { reducers } from './app.reducer';
-import { ModalLoginComponent } from './authentication/modal-login/modal-login.component';
+import { ModalLoginComponent } from './components/authentication/modal-login/modal-login.component';
 import { HomeComponent } from './components/home/home.component';
+import { LocalizedTextComponent } from './configuration/localized-text/localized-text.component';
+import { PlaceholderDirective } from './directives/placeholder.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     IntroComponent,
     ModalLoginComponent,
-    HomeComponent
+    HomeComponent,
+    LocalizedTextComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
