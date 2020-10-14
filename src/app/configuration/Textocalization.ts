@@ -10,5 +10,9 @@ export const TEXT_LOCALIZATION = {
     email_EN: 'email',
     password_FR: 'mot de passe',
     password_EN: 'password',
+    emailRequired_FR: 'L\'email est obligatoire',
+    emailRequired_EN: 'Email is required',
+    passwordRequired_FR: 'Le mot de passe est obligatoire',
+    passwordRequired_EN: 'Password is required',
 
 }

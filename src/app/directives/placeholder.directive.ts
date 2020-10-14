@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { getLocalizeText } from 'src/app/helpers/HepersFunctions';
 import { Store } from '@ngrx/store';
@@ -7,7 +7,7 @@ import * as fromRoot from '../app.reducer';
 @Directive({
   selector: '[appPlaceholder]'
 })
-export class PlaceholderDirective {
+export class PlaceholderDirective implements OnInit, OnDestroy {
 
   @Input('appPlaceholder') text: string;
   private el: ElementRef;
@@ -26,6 +26,13 @@ export class PlaceholderDirective {
     const text = getLocalizeText(this.text, this.language);
     
     this.el.nativeElement.placeholder = getLocalizeText(this.language, this.text);
+  }
+
+  ngOnDestroy() {
+
+    if (this.storeSub) {
+      this.storeSub.unsubscribe();
+    }
   }
 
 }

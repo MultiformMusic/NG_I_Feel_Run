@@ -27,7 +27,7 @@
 
                    <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
                       <div *ngIf="isRequired('email')">
-                        Email is required.
+                        <app-localized-text text="emailRequired"></app-localized-text>
                       </div>          
                     </div>         
 
@@ -40,7 +40,7 @@
 
                     <div *ngIf="isInvalidForm('password')" class="alert alert-danger">
                       <div *ngIf="isRequired('password')">
-                          Password is required.
+                        <app-localized-text text="passwordRequired"></app-localized-text>
                       </div>             
                     </div>  
 
