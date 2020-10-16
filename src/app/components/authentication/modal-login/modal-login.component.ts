@@ -5,7 +5,9 @@ import { Store } from '@ngrx/store';
 
 import * as fromRoot from '../../../app.reducer';
 import * as authActions from '../ngrx/auth.actions';
-import { ThrowStmt } from '@angular/compiler';
+import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { secureConstants } from '../../../helpers/secureConstants';
 
 @Component({
   selector: 'modal-login',
@@ -22,8 +24,10 @@ export class ModalLoginComponent implements OnInit {
   authenticationInProgress: boolean = false;
 
   constructor(private formBuilder: FormBuilder, 
+              private router: Router,
               private store: Store<fromRoot.State>,
-              private authService: AuthenticationService) { }
+              private authService: AuthenticationService,
+              private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
     this.initForm();
@@ -105,14 +109,29 @@ export class ModalLoginComponent implements OnInit {
 
     try {
 
+      // authentification utilisateur
       const response = await this.authService.loginFirebase(user.email, user.password);
       const {email, uid} = response.user;
-      console.log(response.user.email);
-      console.log(response.user.uid);
+
+      // récupération id token
+      const token = this.authService.getCurrentTokenUser();
+      if (token == null) {
+        throw 'Authentication failed';
+      }
+
+      // création token custom d'expiration 30 jours
+      const result = await this.authService.createCustomUserToken(uid);
+      console.log(result.customToken);
+
       this.authenticationInProgress = false;
 
+      // création custom token
+      //this.localStorageService.set(secureConstants.STORAGE_TOKEN, refreshToken);
       this.store.dispatch(new authActions.setIsAuthenticated(true));
       this.store.dispatch(new authActions.setUser({email, uid}));
+
+      //this.modalLogin.nativeElement.style.display = 'none';
+      //this.router.navigate(['/connected/home']);
 
       
     } catch (error) {

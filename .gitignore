@@ -52,3 +52,5 @@ firebase.json
 
 /src/environments/*
 /src/app/helpers/secureConstants.ts
+
+ifeelrunreactnative.json

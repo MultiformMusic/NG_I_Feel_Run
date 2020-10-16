@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './components/authentication/services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,11 @@ import { Router } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'I-Feel-Run';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthenticationService) {}
 
   ngOnInit() {
+
+    this.authService.checkAuthenticated();
     this.router.navigate(['home']);
   }
 
