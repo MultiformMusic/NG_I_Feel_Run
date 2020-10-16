@@ -1,5 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
+import { Store } from '@ngrx/store';
+
+import * as fromRoot from '../../../app.reducer';
+import * as authActions from '../ngrx/auth.actions';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'modal-login',
@@ -13,9 +19,11 @@ export class ModalLoginComponent implements OnInit {
 
   loginForm: FormGroup;
   errors: any[] = [];
-  callCloudFunction: boolean = false;
+  authenticationInProgress: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, 
+              private store: Store<fromRoot.State>,
+              private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.initForm();
@@ -85,14 +93,31 @@ export class ModalLoginComponent implements OnInit {
    * - affichage toaster succés => redirection vers connected/home
    * 
    */
-  login() {
+  async login() {
 
-    this.callCloudFunction = true;
+    this.authenticationInProgress = true;
     this.errors = [];
 
     const user = {
       email: this.loginForm.get('email').value,
       password: this.loginForm.get('password').value
+    }
+
+    try {
+
+      const response = await this.authService.loginFirebase(user.email, user.password);
+      const {email, uid} = response.user;
+      console.log(response.user.email);
+      console.log(response.user.uid);
+      this.authenticationInProgress = false;
+
+      this.store.dispatch(new authActions.setIsAuthenticated(true));
+      this.store.dispatch(new authActions.setUser({email, uid}));
+
+      
+    } catch (error) {
+      console.log(error);
+      this.authenticationInProgress = false;
     }
 
     /*this.authenticationService.loginMongoUser(user).subscribe(

@@ -14,5 +14,7 @@ export const TEXT_LOCALIZATION = {
     emailRequired_EN: 'Email is required',
     passwordRequired_FR: 'Le mot de passe est obligatoire',
     passwordRequired_EN: 'Password is required',
+    authenticationInProgress_FR: 'Authentification en cours',
+    authenticationInProgress_EN: 'Authentication in progress',
 
 }

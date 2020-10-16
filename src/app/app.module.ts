@@ -13,6 +13,11 @@ import { HomeComponent } from './components/home/home.component';
 import { LocalizedTextComponent } from './configuration/localized-text/localized-text.component';
 import { PlaceholderDirective } from './directives/placeholder.directive';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { HomeConnectedComponent } from './components/connected/home-connected/home-connected.component';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,14 +25,17 @@ import { PlaceholderDirective } from './directives/placeholder.directive';
     ModalLoginComponent,
     HomeComponent,
     LocalizedTextComponent,
-    PlaceholderDirective
+    PlaceholderDirective,
+    HomeConnectedComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot(reducers)
+    AngularFireModule.initializeApp(environment.firebase),
+    StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

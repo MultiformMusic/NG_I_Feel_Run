@@ -52,9 +52,9 @@
           </p>
         </div>
 
-        <ng-container *ngIf="callCloudFunction">
-          <p class="callCloudFunctionMessage text-center blink_me">
-            Authentication in progress
+        <ng-container *ngIf="authenticationInProgress">
+          <p class="callFirebaseAuth text-center blink_me">
+            <app-localized-text text="authenticationInProgress"></app-localized-text>
           </p>
         </ng-container>
 
