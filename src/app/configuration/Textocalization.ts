@@ -17,4 +17,12 @@ export const TEXT_LOCALIZATION = {
     authenticationInProgress_FR: 'Authentification en cours',
     authenticationInProgress_EN: 'Authentication in progress',
 
+    authInvalidEmail_FR: 'Le format de l\'email est invalide',
+    authInvalidEmail_EN: 'The email format is invalid',
+    authUserNotFound_FR: 'Utiisateur non trouvé',
+    authUserNotFound_EN: 'User not found',
+
+    genericError_FR: 'Un problème innatendu est survenu',
+    genericError_EN: 'An unexpected error occured.'
+
 }

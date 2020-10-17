@@ -25,3 +25,26 @@ export const getLocalizeText = (language: string, text: string) : string => {
     return TEXT_LOCALIZATION[text + "_" + language.toUpperCase()];
 
 } 
+
+/**
+ * 
+ * Retourne le code text par rapport au code erreur firebase
+ * 
+ * @param codeError 
+ */
+export const getTextFromFirebaseError = (codeError: string): string => {
+
+    switch (codeError) {
+        
+        case 'auth/invalid-email':
+            return 'authInvalidEmail';
+        case 'auth/user-not-found':
+            return 'authUserNotFound';
+
+        default:
+            return "genericError"
+    }
+
+
+    return "";
+}

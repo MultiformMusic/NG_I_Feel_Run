@@ -8,6 +8,7 @@ import * as authActions from '../ngrx/auth.actions';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { secureConstants } from '../../../helpers/secureConstants';
+import { getTextFromFirebaseError } from '../../../helpers/HepersFunctions';
 
 @Component({
   selector: 'modal-login',
@@ -22,6 +23,7 @@ export class ModalLoginComponent implements OnInit {
   loginForm: FormGroup;
   errors: any[] = [];
   authenticationInProgress: boolean = false;
+  
 
   constructor(private formBuilder: FormBuilder, 
               private router: Router,
@@ -107,37 +109,50 @@ export class ModalLoginComponent implements OnInit {
       password: this.loginForm.get('password').value
     }
 
+    let uid: string;
+    let email: string;
+
+    // partie authentification normale par email/password
     try {
 
-      // authentification utilisateur
       const response = await this.authService.loginFirebase(user.email, user.password);
-      const {email, uid} = response.user;
+      email = response.user.email;
+      uid = response.user.uid;
 
-      // récupération id token
-      const token = this.authService.getCurrentTokenUser();
-      if (token == null) {
-        throw 'Authentication failed';
-      }
+    } catch (error) {
+      console.log(error);
+      const codeErrorTransform = getTextFromFirebaseError(error.code);
+      this.errors.push({detail: codeErrorTransform});
+      this.authenticationInProgress = false;
+    }
+
+    // Récupération des tokens et postionnement dans LocalStorage
+    // current token de l'user - custom token contenant
+    try {
 
       // création token custom d'expiration 30 jours
-      const result = await this.authService.createCustomUserToken(uid);
-      console.log(result.customToken);
+      const {customToken} = await this.authService.createCustomUserToken(uid);
+      if (customToken) {
+        this.localStorageService.set(secureConstants.STORAGE_CUSTOM_TOKEN, customToken);
+      }
+      // récupération token normal (currrent token)
+      const currentToken = await this.authService.getCurrentTokenUser();
+      this.localStorageService.set(secureConstants.STORAGE_TOKEN, currentToken);
+      
+      
+    } catch (error) {
+      
+    }
 
       this.authenticationInProgress = false;
 
-      // création custom token
-      //this.localStorageService.set(secureConstants.STORAGE_TOKEN, refreshToken);
+      // mise à jour du store
       this.store.dispatch(new authActions.setIsAuthenticated(true));
       this.store.dispatch(new authActions.setUser({email, uid}));
 
       //this.modalLogin.nativeElement.style.display = 'none';
       //this.router.navigate(['/connected/home']);
 
-      
-    } catch (error) {
-      console.log(error);
-      this.authenticationInProgress = false;
-    }
 
     /*this.authenticationService.loginMongoUser(user).subscribe(
       (res: Response) => {
