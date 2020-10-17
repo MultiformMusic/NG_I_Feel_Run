@@ -1,4 +1,5 @@
 import { TEXT_LOCALIZATION } from '../configuration/Textocalization';
+import { secureConstants } from './secureConstants';
 
 export const localizeTexts = (language: string, arrayOfTexts: string[]) : string[] => {
 
@@ -35,7 +36,7 @@ export const getLocalizeText = (language: string, text: string) : string => {
 export const getTextFromFirebaseError = (codeError: string): string => {
 
     switch (codeError) {
-        
+
         case 'auth/invalid-email':
             return 'authInvalidEmail';
         case 'auth/user-not-found':
@@ -44,7 +45,19 @@ export const getTextFromFirebaseError = (codeError: string): string => {
         default:
             return "genericError"
     }
+}
 
+/**
+ * 
+ * Retourne l'url de la cloud function suivant qu'on est config en remote ou non
+ * 
+ * @param url 
+ */
+export const getUrlCloudFuncions = (url: string): string => {
 
-    return "";
+    switch (url) {
+
+        case 'URL_CREATE_CUSTOM_TOKEN':
+            return secureConstants.REMOTE ? secureConstants.URL_CREATE_CUSTOM_TOKEN_REMOTE : secureConstants.URL_CREATE_CUSTOM_TOKEN_LOCAL;
+    }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { getUrlCloudFuncions } from 'src/app/helpers/HepersFunctions';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { secureConstants } from '../../../helpers/secureConstants';
 
@@ -60,7 +61,8 @@ export class AuthenticationService {
       }
 
       try {
-        return this.httpClient.post(secureConstants.URL_CREATE_CUSTOM_TOKEN_REMOTE, JSON.stringify({user})).toPromise();
+
+        return this.httpClient.post(getUrlCloudFuncions('URL_CREATE_CUSTOM_TOKEN'), JSON.stringify({user})).toPromise();
         
       } catch (error) {
         console.log(error);

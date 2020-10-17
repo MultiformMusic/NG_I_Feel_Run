@@ -139,40 +139,18 @@ export class ModalLoginComponent implements OnInit {
       const currentToken = await this.authService.getCurrentTokenUser();
       this.localStorageService.set(secureConstants.STORAGE_TOKEN, currentToken);
       
-      
     } catch (error) {
       
     }
 
-      this.authenticationInProgress = false;
+    this.authenticationInProgress = false;
 
-      // mise à jour du store
-      this.store.dispatch(new authActions.setIsAuthenticated(true));
-      this.store.dispatch(new authActions.setUser({email, uid}));
+    // mise à jour du store
+    this.store.dispatch(new authActions.setIsAuthenticated(true));
+    this.store.dispatch(new authActions.setUser({email, uid}));
 
-      //this.modalLogin.nativeElement.style.display = 'none';
-      //this.router.navigate(['/connected/home']);
-
-
-    /*this.authenticationService.loginMongoUser(user).subscribe(
-      (res: Response) => {
-
-        this.authenticationService.loginFirebase(secureConstants.FIREBASE_EMAIL, secureConstants.FIREBASE_PASSWORD);
-        this.callCloudFunction = false;
-        this.modalLogin.nativeElement.style.display = 'none';
-        this.router.navigate(['/connected/home']);
-
-        setTimeout(() => {
-          location.reload();
-        }, 1);
-
-      },
-      (errorResponse) => {
-        this.callCloudFunction = false;
-        this.errors = [];
-        this.errors.push(JSON.parse(errorResponse._body).errors[0]);
-      }
-    );*/
+    this.modalLogin.nativeElement.style.display = 'none';
+    this.router.navigate(['/connected/home']);
 
   }
   
