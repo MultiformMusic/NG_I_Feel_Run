@@ -61,5 +61,7 @@ export const getUrlCloudFuncions = (url: string): string => {
 
         case 'URL_CREATE_CUSTOM_TOKEN':
             return secureConstants.REMOTE ? secureConstants.URL_CREATE_CUSTOM_TOKEN_REMOTE : secureConstants.URL_CREATE_CUSTOM_TOKEN_LOCAL;
+        case 'URL_VALID_TOKEN':
+            return secureConstants.REMOTE ? secureConstants.URL_VALID_TOKEN_REMOTE : secureConstants.URL_VALID_TOKEN_LOCAL;
     }
 }

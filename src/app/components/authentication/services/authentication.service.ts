@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { getUrlCloudFuncions } from 'src/app/helpers/HepersFunctions';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { secureConstants } from '../../../helpers/secureConstants';
+import jwt_decode from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -69,10 +70,31 @@ export class AuthenticationService {
       }
     }
 
+    /**
+     * 
+     * Détermine si l'utilisateur est déjà authentifié
+     * 
+     */
     async checkAuthenticated() {
 
-      const token = this.localeStorageService.get(secureConstants.STORAGE_TOKEN);
-      console.log(token);
+      const token = await this.localeStorageService.get(secureConstants.STORAGE_TOKEN);
+      if (!token) return false;
+      
+      try {
+
+        const res = await this.httpClient.post<any>(getUrlCloudFuncions('URL_VALID_TOKEN'), JSON.stringify({token})).toPromise();
+        if (!res || !res.uid) return false;
+        const uid = res.uid;
+
+        // vérification uid est bien celui du custom token et custom token non expriré
+        const customToken = await this.localeStorageService.get(secureConstants.STORAGE_CUSTOM_TOKEN);
+        if (!customToken) return false;
+        const decoded: any = jwt_decode(customToken); 
+        console.log(decoded.uid);
+        
+      } catch (error) {
+        console.log(error);
+      }
 
     }
 }

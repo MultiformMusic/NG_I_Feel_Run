@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('app call')
     this.authService.checkAuthenticated();
     this.router.navigate(['home']);
   }
