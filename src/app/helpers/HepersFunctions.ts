@@ -41,6 +41,8 @@ export const getTextFromFirebaseError = (codeError: string): string => {
             return 'authInvalidEmail';
         case 'auth/user-not-found':
             return 'authUserNotFound';
+        case 'auth/wrong-password':
+            return 'authUserNotFound';
 
         default:
             return "genericError"

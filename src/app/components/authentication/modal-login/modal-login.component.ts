@@ -124,6 +124,7 @@ export class ModalLoginComponent implements OnInit {
       const codeErrorTransform = getTextFromFirebaseError(error.code);
       this.errors.push({detail: codeErrorTransform});
       this.authenticationInProgress = false;
+      return;
     }
 
     // Récupération des tokens et postionnement dans LocalStorage

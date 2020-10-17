@@ -7,7 +7,9 @@ import { IntroComponent } from './components/intro/intro.component';
 const routes: Routes = [
   {path: 'intro', component: IntroComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'connected/home', component: HomeConnectedComponent}
+  {path: 'connected/home', component: HomeConnectedComponent},
+  {path: '**', component: HomeComponent},
+
 ];
 
 @NgModule({
