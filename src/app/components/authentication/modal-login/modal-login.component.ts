@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { secureConstants } from '../../../helpers/secureConstants';
 import { getTextFromFirebaseError } from '../../../helpers/HepersFunctions';
+import { EncryptionServiceService } from '../../../services/encryption-service.service';
 
 @Component({
   selector: 'modal-login',
@@ -29,6 +30,7 @@ export class ModalLoginComponent implements OnInit {
               private router: Router,
               private store: Store<fromRoot.State>,
               private authService: AuthenticationService,
+              private encryptionService: EncryptionServiceService,
               private localStorageService: LocalStorageService) { }
 
   ngOnInit() {
@@ -134,7 +136,8 @@ export class ModalLoginComponent implements OnInit {
       // création token custom d'expiration 30 jours
       const {customToken} = await this.authService.createCustomUserToken(uid);
       if (customToken) {
-        this.localStorageService.set(secureConstants.STORAGE_CUSTOM_TOKEN, customToken);
+        const encryptedToken = this.encryptionService.encryptValue(customToken)
+        this.localStorageService.set(secureConstants.STORAGE_CUSTOM_TOKEN, encryptedToken);
       }
       // récupération token normal (currrent token)
       const currentToken = await this.authService.getCurrentTokenUser();

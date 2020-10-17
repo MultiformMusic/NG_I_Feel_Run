@@ -5,6 +5,7 @@ import { getUrlCloudFuncions } from 'src/app/helpers/HepersFunctions';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { secureConstants } from '../../../helpers/secureConstants';
 import jwt_decode from "jwt-decode";
+import { EncryptionServiceService } from '../../../services/encryption-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class AuthenticationService {
 
   constructor(private firebaseAuth: AngularFireAuth, 
               private httpClient: HttpClient,
-              private localeStorageService: LocalStorageService) { }
+              private localeStorageService: LocalStorageService,
+              private encryptionService: EncryptionServiceService) { }
 
       /**
      * 
@@ -74,26 +76,42 @@ export class AuthenticationService {
      * 
      * Détermine si l'utilisateur est déjà authentifié
      * 
+     * Le custom token est encrypté
+     * 
+     * - Comparaison uid token normal (current token) au custom token
+     * - Vérification date d'expiration custom token
+     * 
      */
     async checkAuthenticated() {
 
-      const token = await this.localeStorageService.get(secureConstants.STORAGE_TOKEN);
-      if (!token) return false;
+      const currentToken = await this.localeStorageService.get(secureConstants.STORAGE_TOKEN);
+      if (!currentToken) return false;
+      const decodedCurrentToken: any = jwt_decode(currentToken); 
       
       try {
 
-        const res = await this.httpClient.post<any>(getUrlCloudFuncions('URL_VALID_TOKEN'), JSON.stringify({token})).toPromise();
-        if (!res || !res.uid) return false;
-        const uid = res.uid;
+        //const res = await this.httpClient.post<any>(getUrlCloudFuncions('URL_VALID_TOKEN'), JSON.stringify({token})).toPromise();
+        //if (!res || !res.uid) return false;
+        //const uid = res.uid;
 
         // vérification uid est bien celui du custom token et custom token non expriré
         const customToken = await this.localeStorageService.get(secureConstants.STORAGE_CUSTOM_TOKEN);
         if (!customToken) return false;
-        const decoded: any = jwt_decode(customToken); 
-        console.log(decoded.uid);
-        
+        const decryptedToken = this.encryptionService.decryptValue(customToken);
+        const decoded: any = jwt_decode(decryptedToken); 
+        if (!decoded || !decoded.uid) return false;
+
+        // les uid sont bien les mêmes
+        if (decodedCurrentToken.user_id !== decoded.uid) return false;
+
+        // la date d'expiration n'est pas atteinte
+        if (Date.now() > decoded.claims.expiresAt) return false;
+
+        return true;
+
       } catch (error) {
         console.log(error);
+        return false;
       }
 
     }
