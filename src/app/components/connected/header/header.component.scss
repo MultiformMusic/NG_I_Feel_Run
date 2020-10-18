@@ -27,7 +27,7 @@ header {
     padding: 0 15px;
     height: 40px;
     line-height: 40px;
-    animation: .8s linear slidein;
+    animation: .8s linear slideinLeft;
 
     &-text {
         font-family: 'Kurale';
@@ -42,6 +42,32 @@ header {
 
 }
 
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+
+.container-user-mail {
+    display:flex; 
+    flex-direction: column; 
+    align-items: center;
+    margin-top: .5rem;
+}
+
+.container-logout {
+    margin-top: .5rem;
+    margin-right: .5rem;
+}
+
+.user-mail {
+    font-family: 'Kurale';
+    text-transform: none;
+    font-size: 0.9rem;
+}
+
 .menu-item {
     font-size: 13px;
     letter-spacing: 1px;
@@ -54,27 +80,12 @@ header {
     color: #fff;
 }
 
+.navbar-nav {
+    animation: .8s linear slideinRight;
+}
+
 .navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
     color: #70aed2;
-}
-.link-login:hover {
-    color: #70aed2;
-}
-
-.link-login {
-    color: rgb(60, 159, 10);
-    transition: color .5s;
-}
-
-.link-signin {
-    background: #175a94;
-    color: #fff;
-    transition: color .5s;
-}
-
-.link-signin:hover {
-    background: #175a94;
-    color: #aaa;
 }
 
 .link-logout {
@@ -131,26 +142,6 @@ header {
 
 /* end of navbar */
 
-/* banner */
-.banner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-}
-
-.banner-heading {
-    animation-name: anim;
-    animation-duration: 2s;
-}
-
-.banner-par {
-    animation-name: anim;
-    animation-duration: 2s;
-    animation-delay: .5s;
-    animation-fill-mode: backwards;   
-}
 
 @keyframes anim {
 
@@ -192,7 +183,26 @@ header {
 /* end header */
 
 
-@keyframes slidein {
+@keyframes slideinLeft {
     from { transform: translate(-300px); }
     to   { transform: translate(0px); }
-  }
+}
+
+@keyframes slideinRight {
+    from { transform: translate(300px); }
+    to   { transform: translate(0px); }
+}
+
+@media (max-width: 992px) {
+
+    .container-logout {
+        margin-left: 1.6rem;
+        margin-top: .7rem;
+    }
+
+    .container-user-mail {
+        align-items: flex-start;
+        margin-left: 1.6rem;
+        margin-top: .3rem;
+    }
+}
