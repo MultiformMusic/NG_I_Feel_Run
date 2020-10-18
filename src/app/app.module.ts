@@ -18,6 +18,7 @@ import { environment } from '../environments/environment';
 import { HomeConnectedComponent } from './components/connected/home-connected/home-connected.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
+import { HeaderComponent } from './components/connected/header/header.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     LocalizedTextComponent,
     PlaceholderDirective,
-    HomeConnectedComponent
+    HomeConnectedComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

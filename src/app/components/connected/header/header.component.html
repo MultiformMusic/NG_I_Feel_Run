@@ -1,0 +1,42 @@
+<!-- HOME - HEADER -->
+<header id="home">
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top nav-menu custom-navbar">
+
+        <a href="#home" class="navbar-brand text-light">
+            <span class="h4 ml-2" class="navbar-brand-text" >
+                <img src="../../../../assets//icon_favorite.png" class="navbar-brand-img"/>
+                I Feel Run
+            </span>
+        </a>
+        <button class="navbar-toggler nav-button" type="button" data-toggle="collapse" 
+                data-target="#myNavbar">
+            <div class="bg-light line1"></div>
+            <div class="bg-light line2"></div>
+            <div class="bg-light line3"></div>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end text-uppercase font-weight-bold" id="myNavbar">
+            
+            <ul class="navbar-nav">
+                <ng-container *ngIf="isAuthenticated">
+                    <li class="nav-item">
+                        <a (click)="logout()" class="nav-link m-2 menu-item">
+                            <i class="fas fa-sign-out-alt fa-2x link-logout" title="Log Out"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 3rem;">
+                        <a href="connected/home" class="nav-link m-2 menu-item" >
+                            <i class="fas fa-user-circle fa-2x" title="Personnal Page"></i>
+                            <span>{{user.email}}</span>
+                        </a>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+
+    </nav>
+    <!-- end navbar -->
+
+</header>
+<!-- END HOME - HEADER -->

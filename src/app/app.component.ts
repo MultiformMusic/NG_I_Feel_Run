@@ -20,9 +20,11 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
 
+    // détermine si l'utilisateur est déjà authentifié
     const user = await this.authService.checkAuthenticated();
     if (user) {
       this.store.dispatch(new authActions.setUser(user));
+      this.store.dispatch(new authActions.setIsAuthenticated(true));
       this.router.navigate(['connected/home']);
     }  
       

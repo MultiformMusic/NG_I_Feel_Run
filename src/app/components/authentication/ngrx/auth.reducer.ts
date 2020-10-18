@@ -33,3 +33,4 @@ export function authReducer (state = INITIAL_STATE, action: AuthActions) {
 // function d'aide pour accèder à l'état du state
 export const getIsAuthenticated = (state: AuthState) => state.isAuthenticated;
 export const getUser = (state: AuthState) => state.user;
+export const getAuthInfos = (state: AuthState) => state;
