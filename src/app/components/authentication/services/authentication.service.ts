@@ -6,6 +6,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { secureConstants } from '../../../helpers/secureConstants';
 import jwt_decode from "jwt-decode";
 import { EncryptionServiceService } from '../../../services/encryption-service.service';
+import { User } from '../../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -82,10 +83,10 @@ export class AuthenticationService {
      * - Vérification date d'expiration custom token
      * 
      */
-    async checkAuthenticated() {
+    async checkAuthenticated(): Promise<User> {
 
       const currentToken = await this.localeStorageService.get(secureConstants.STORAGE_TOKEN);
-      if (!currentToken) return false;
+      if (!currentToken) return null;
       const decodedCurrentToken: any = jwt_decode(currentToken); 
       
       try {
@@ -96,22 +97,22 @@ export class AuthenticationService {
 
         // vérification uid est bien celui du custom token et custom token non expriré
         const customToken = await this.localeStorageService.get(secureConstants.STORAGE_CUSTOM_TOKEN);
-        if (!customToken) return false;
+        if (!customToken) return null;
         const decryptedToken = this.encryptionService.decryptValue(customToken);
         const decoded: any = jwt_decode(decryptedToken); 
-        if (!decoded || !decoded.uid) return false;
+        if (!decoded || !decoded.uid) return null;
 
         // les uid sont bien les mêmes
-        if (decodedCurrentToken.user_id !== decoded.uid) return false;
+        if (decodedCurrentToken.user_id !== decoded.uid) return null;
 
         // la date d'expiration n'est pas atteinte
-        if (Date.now() > decoded.claims.expiresAt) return false;
+        if (Date.now() > decoded.claims.expiresAt) return null;
 
-        return true;
+        return {email: decodedCurrentToken.email, uid: decodedCurrentToken.user_id};
 
       } catch (error) {
         console.log(error);
-        return false;
+        return null;
       }
 
     }
