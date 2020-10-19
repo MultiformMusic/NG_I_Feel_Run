@@ -28,6 +28,7 @@
     "firebase": "^7.13.1",
     "firebase-admin": "^9.2.0",
     "jwt-decode": "^3.0.0",
+    "ngx-indexed-db": "^6.1.0",
     "ngx-toastr": "^13.1.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
@@ -60,7 +61,7 @@
     "inquirer-autocomplete-prompt": "^1.0.1",
     "open": "^7.0.3"
   },
-    "browser": {
-        "crypto": false
-    }
+  "browser": {
+    "crypto": false
+  }
 }

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxIndexedDBModule } from 'ngx-indexed-db';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,6 +20,20 @@ import { HomeConnectedComponent } from './components/connected/home-connected/ho
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/connected/header/header.component';
+import { secureConstants } from './helpers/secureConstants';
+
+const dbConfig = {
+  name: secureConstants.INDEX_DB_NAME,
+  version: 1,
+  objectStoresMeta: [{
+    store: secureConstants.INDEX_DB_STORE_NAME,
+    storeConfig: { keyPath: 'id', autoIncrement: true },
+    storeSchema: [
+      { name: 'currentToken', keypath: 'currentToken', options: { unique: false } },
+      { name: 'customToken', keypath: 'customToken', options: { unique: false } }
+    ]
+  }]
+};
 
 @NgModule({
   declarations: [
@@ -39,6 +54,7 @@ import { HeaderComponent } from './components/connected/header/header.component'
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     StoreModule.forRoot(reducers),
+    // NgxIndexedDBModule.forRoot(dbConfig),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

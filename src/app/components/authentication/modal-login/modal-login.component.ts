@@ -10,6 +10,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { secureConstants } from '../../../helpers/secureConstants';
 import { getTextFromFirebaseError } from '../../../helpers/HepersFunctions';
 import { EncryptionServiceService } from '../../../services/encryption-service.service';
+import { NgxIndexedDBService } from 'ngx-indexed-db';
 
 @Component({
   selector: 'modal-login',
@@ -31,7 +32,9 @@ export class ModalLoginComponent implements OnInit {
               private store: Store<fromRoot.State>,
               private authService: AuthenticationService,
               private encryptionService: EncryptionServiceService,
-              private localStorageService: LocalStorageService) { }
+              private localStorageService: LocalStorageService,
+              // private indexDbService: NgxIndexedDBService
+              ) { }
 
   ngOnInit() {
     this.initForm();
@@ -133,18 +136,32 @@ export class ModalLoginComponent implements OnInit {
     // current token de l'user - custom token contenant
     try {
 
-      // création token custom d'expiration 30 jours
+      // création token custom d'expiration 2 jours
       const {customToken} = await this.authService.createCustomUserToken(uid);
+      let encryptedToken = null;
       if (customToken) {
-        const encryptedToken = this.encryptionService.encryptValue(customToken)
+        encryptedToken = this.encryptionService.encryptValue(customToken)
         this.localStorageService.set(secureConstants.STORAGE_CUSTOM_TOKEN, encryptedToken);
       }
       // récupération token normal (currrent token)
       const currentToken = await this.authService.getCurrentTokenUser();
       this.localStorageService.set(secureConstants.STORAGE_TOKEN, currentToken);
+
+      // sauvegarde tokens dans indexDB :mise en commentaire car pas besoin en fait
+      /*const deleted = await this.indexDbService.clear(secureConstants.INDEX_DB_STORE_NAME).toPromise();
+
+      const result = await this.indexDbService
+                              .add(secureConstants.INDEX_DB_STORE_NAME, {
+                                    currentToken: currentToken,
+                                    customToken: encryptedToken,
+                                }).toPromise();
+                
+
+      console.log(result);*/
+        
       
     } catch (error) {
-      
+      console.log(error);
     }
 
     this.authenticationInProgress = false;
