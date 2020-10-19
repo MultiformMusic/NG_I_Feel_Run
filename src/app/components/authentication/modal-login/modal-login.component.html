@@ -42,7 +42,17 @@
                       <div *ngIf="isRequired('password')">
                         <app-localized-text text="passwordRequired"></app-localized-text>
                       </div>             
-                    </div>  
+                    </div>
+                    
+              <div style="flex-direction: row;" class="ml-2">
+                <label class="mr-3" style="font-size: .9rem;">
+                  <app-localized-text text="modalRemember"></app-localized-text>
+                </label>
+                <input 
+                  type="checkbox"
+                  formControlName="remember"
+                />
+              </div>
 
           </div>
         </form>

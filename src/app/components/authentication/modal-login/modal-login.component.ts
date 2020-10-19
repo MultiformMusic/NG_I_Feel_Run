@@ -25,7 +25,6 @@ export class ModalLoginComponent implements OnInit {
   loginForm: FormGroup;
   errors: any[] = [];
   authenticationInProgress: boolean = false;
-  
 
   constructor(private formBuilder: FormBuilder, 
               private router: Router,
@@ -46,6 +45,7 @@ export class ModalLoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      remember: [false]
     });
 
   }
@@ -114,6 +114,8 @@ export class ModalLoginComponent implements OnInit {
       password: this.loginForm.get('password').value
     }
 
+    const remember = this.loginForm.get('remember').value;
+
     let uid: string;
     let email: string;
 
@@ -134,34 +136,37 @@ export class ModalLoginComponent implements OnInit {
 
     // Récupération des tokens et postionnement dans LocalStorage
     // current token de l'user - custom token contenant
-    try {
-
-      // création token custom d'expiration 2 jours
-      const {customToken} = await this.authService.createCustomUserToken(uid);
-      let encryptedToken = null;
-      if (customToken) {
-        encryptedToken = this.encryptionService.encryptValue(customToken)
-        this.localStorageService.set(secureConstants.STORAGE_CUSTOM_TOKEN, encryptedToken);
-      }
-      // récupération token normal (currrent token)
-      const currentToken = await this.authService.getCurrentTokenUser();
-      this.localStorageService.set(secureConstants.STORAGE_TOKEN, currentToken);
-
-      // sauvegarde tokens dans indexDB :mise en commentaire car pas besoin en fait
-      /*const deleted = await this.indexDbService.clear(secureConstants.INDEX_DB_STORE_NAME).toPromise();
-
-      const result = await this.indexDbService
-                              .add(secureConstants.INDEX_DB_STORE_NAME, {
-                                    currentToken: currentToken,
-                                    customToken: encryptedToken,
-                                }).toPromise();
-                
-
-      console.log(result);*/
-        
+    if (remember) {
       
-    } catch (error) {
-      console.log(error);
+      try {
+  
+        // création token custom d'expiration 2 jours
+        const {customToken} = await this.authService.createCustomUserToken(uid);
+        let encryptedToken = null;
+        if (customToken) {
+          encryptedToken = this.encryptionService.encryptValue(customToken)
+          this.localStorageService.set(secureConstants.STORAGE_CUSTOM_TOKEN, encryptedToken);
+        }
+        // récupération token normal (currrent token)
+        const currentToken = await this.authService.getCurrentTokenUser();
+        this.localStorageService.set(secureConstants.STORAGE_TOKEN, currentToken);
+  
+        // sauvegarde tokens dans indexDB :mise en commentaire car pas besoin en fait
+        /*const deleted = await this.indexDbService.clear(secureConstants.INDEX_DB_STORE_NAME).toPromise();
+  
+        const result = await this.indexDbService
+                                .add(secureConstants.INDEX_DB_STORE_NAME, {
+                                      currentToken: currentToken,
+                                      customToken: encryptedToken,
+                                  }).toPromise();
+                  
+  
+        console.log(result);*/
+          
+        
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     this.authenticationInProgress = false;
