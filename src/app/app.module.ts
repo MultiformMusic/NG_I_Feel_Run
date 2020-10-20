@@ -12,7 +12,6 @@ import { reducers } from './app.reducer';
 import { ModalLoginComponent } from './components/authentication/modal-login/modal-login.component';
 import { HomeComponent } from './components/home/home.component';
 import { LocalizedTextComponent } from './configuration/localized-text/localized-text.component';
-import { PlaceholderDirective } from './directives/placeholder.directive';
 
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
@@ -21,6 +20,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/connected/header/header.component';
 import { secureConstants } from './helpers/secureConstants';
+import { AttributeLocalizedDirective } from './directives/attribute-localized.directive';
 
 const dbConfig = {
   name: secureConstants.INDEX_DB_NAME,
@@ -42,9 +42,9 @@ const dbConfig = {
     ModalLoginComponent,
     HomeComponent,
     LocalizedTextComponent,
-    PlaceholderDirective,
     HomeConnectedComponent,
-    HeaderComponent
+    HeaderComponent,
+    AttributeLocalizedDirective
   ],
   imports: [
     BrowserModule,

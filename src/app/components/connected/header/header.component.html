@@ -23,14 +23,27 @@
                     <li class="nav-item">
                         <a  class="nav-link menu-item">
                             <div class="container-logout">
-                                <i class="fas fa-sign-out-alt fa-2x link-logout" title="Log Out"></i>
+                                <i 
+                                    class="fas fa-sign-out-alt fa-2x link-logout" 
+                                    appAttributeLocalized
+                                    [appAttributeLocalizedText]="'headerLogout'"
+                                    [appAttributeLocalizedName]="'title'"
+                                >
+                                </i>
                             </div>
                         </a>
                     </li>
                     <li class="nav-item" style="margin-right: 3rem;">
                         <a href="connected/home" class="nav-link menu-item" >
                             <div class="container-user-mail">
-                                <i class="fas fa-user-circle fa-2x" title="Personnal Page"></i>
+                                <i 
+                                    class="fas fa-user-circle fa-2x" 
+                                    appAttributeLocalized
+                                    [appAttributeLocalizedText]="'headerAccount'"
+                                    [appAttributeLocalizedName]="'title'"
+                                >
+
+                                </i>
                                 <span class="mt-2 user-mail">{{user.email}}</span>                           
                             </div>
                         </a>

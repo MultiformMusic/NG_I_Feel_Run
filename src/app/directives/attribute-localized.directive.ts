@@ -5,13 +5,14 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../app.reducer';
 
 @Directive({
-  selector: '[appPlaceholder]'
+  selector: '[appAttributeLocalized]'
 })
-export class PlaceholderDirective implements OnInit, OnDestroy {
+export class AttributeLocalizedDirective implements OnInit, OnDestroy {
 
-  @Input('appPlaceholder') text: string;
+  @Input('appAttributeLocalizedText') text: string;
+  @Input('appAttributeLocalizedName') name: string;
   private el: ElementRef;
-  private storeSub: Subscription;
+  private storeSub: Subscription; 
   private language: string;
 
   constructor(el: ElementRef, private store: Store<fromRoot.State>) { 
@@ -25,7 +26,7 @@ export class PlaceholderDirective implements OnInit, OnDestroy {
 
     const text = getLocalizeText(this.text, this.language);
     
-    this.el.nativeElement.placeholder = getLocalizeText(this.language, this.text);
+    this.el.nativeElement[this.name] = getLocalizeText(this.language, this.text);
   }
 
   ngOnDestroy() {

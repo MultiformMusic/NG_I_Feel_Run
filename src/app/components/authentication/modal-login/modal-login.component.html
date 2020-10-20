@@ -21,7 +21,9 @@
             <input type="email" 
                    class="form-control mb-3"
                    maxlength="40"
-                   [appPlaceholder]="'email'"
+                   appAttributeLocalized
+                   [appAttributeLocalizedText]="'email'"
+                   [appAttributeLocalizedName]="'placeholder'"
                    formControlName="email"
                    (keydown)="onKeydown($event)">
 
@@ -34,7 +36,9 @@
               <input type="password"
                      class="form-control mb-3"
                      maxlength="40"
-                     [appPlaceholder]="'password'"
+                     appAttributeLocalized
+                     [appAttributeLocalizedText]="'password'"
+                     [appAttributeLocalizedName]="'placeholder'"
                      formControlName="password"
                      (keydown)="onKeydown($event)">
 

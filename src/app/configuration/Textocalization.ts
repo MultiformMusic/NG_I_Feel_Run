@@ -25,6 +25,11 @@ export const TEXT_LOCALIZATION = {
     authUserNotFound_EN: 'User not found',
 
     genericError_FR: 'Un problème innatendu est survenu',
-    genericError_EN: 'An unexpected error occured.'
+    genericError_EN: 'An unexpected error occured.',
+
+    headerLogout_FR: 'Se déconnecter',
+    headerLogout_EN: 'Sign out',
+    headerAccount_FR: 'Mon compte',
+    headerAccount_EN: 'My account'
 
 }
