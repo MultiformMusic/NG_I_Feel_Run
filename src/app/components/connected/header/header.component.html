@@ -21,7 +21,7 @@
             <ul class="navbar-nav">
                 <ng-container *ngIf="isAuthenticated">
                     <li class="nav-item">
-                        <a  class="nav-link menu-item">
+                        <a (click)="logout()" class="nav-link menu-item">
                             <div class="container-logout">
                                 <i 
                                     class="fas fa-sign-out-alt fa-2x link-logout" 

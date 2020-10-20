@@ -7,6 +7,7 @@ import { secureConstants } from '../../../helpers/secureConstants';
 import jwt_decode from "jwt-decode";
 import { EncryptionServiceService } from '../../../services/encryption-service.service';
 import { User } from '../../../models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ export class AuthenticationService {
 
   constructor(private firebaseAuth: AngularFireAuth, 
               private httpClient: HttpClient,
+              private router: Router,
               private localeStorageService: LocalStorageService,
               private encryptionService: EncryptionServiceService) { }
 
@@ -28,6 +30,21 @@ export class AuthenticationService {
     async loginFirebase(email: string, password: string): Promise<firebase.auth.UserCredential> {
         
       return this.firebaseAuth.signInWithEmailAndPassword(email, password);
+    }
+
+    async logout() {
+
+      try {
+        const res = await this.firebaseAuth.signOut();
+        
+      } catch (error) {
+        console.log(error);
+      }
+
+      this.localeStorageService.remove(secureConstants.STORAGE_TOKEN);
+      this.localeStorageService.remove(secureConstants.STORAGE_CUSTOM_TOKEN);
+
+      this.router.navigate(['/home']);
     }
 
 
