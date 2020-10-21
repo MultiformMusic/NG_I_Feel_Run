@@ -30,6 +30,9 @@ export const TEXT_LOCALIZATION = {
     headerLogout_FR: 'Se déconnecter',
     headerLogout_EN: 'Sign out',
     headerAccount_FR: 'Mon compte',
-    headerAccount_EN: 'My account'
+    headerAccount_EN: 'My account',
+
+    statisticsLoading_FR: 'Chargement de vos statistiques en cours ...',
+    statisticsLoading_EN: 'Loading your statistics in progress ...',
 
 }

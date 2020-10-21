@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './components/connected/header/header.component';
 import { secureConstants } from './helpers/secureConstants';
 import { AttributeLocalizedDirective } from './directives/attribute-localized.directive';
+import { LoadingComponent } from './components/connected/statistics/loading/loading.component';
 
 const dbConfig = {
   name: secureConstants.INDEX_DB_NAME,
@@ -44,7 +45,8 @@ const dbConfig = {
     LocalizedTextComponent,
     HomeConnectedComponent,
     HeaderComponent,
-    AttributeLocalizedDirective
+    AttributeLocalizedDirective,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
