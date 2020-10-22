@@ -1,3 +1,24 @@
+
+.container {
+    display: flex; 
+    flex-direction: column; 
+    flex: 1; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    background-color: black; 
+    padding-bottom: 10rem;
+}
+
+.text {
+    position: relative; 
+    top: 140px; 
+    font-family: 'Amatic SC'; 
+    font-size: 2.5rem; 
+    color: rgb(252, 180, 146);
+}
+
+
 .blink_me {
     animation: blinker 2s linear infinite;
 }
@@ -21,4 +42,30 @@
 	100% {
 		opacity: 1;
 	}
+}
+
+@media (max-width: 450px) {
+  
+    .text {
+        font-size: 1.6rem;
+        margin-bottom: 1.4rem;;
+    }
+
+    .image {
+        height: 190px;
+        width: auto;
+    }
+}
+
+@media (max-width: 325px) {
+  
+    .text {
+        font-size: 1.3rem;
+        margin-bottom: -1rem;
+    }
+
+    .image {
+        height: 120px;
+        width: auto;
+    }
 }

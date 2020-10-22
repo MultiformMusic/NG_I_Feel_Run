@@ -32,7 +32,7 @@ export const TEXT_LOCALIZATION = {
     headerAccount_FR: 'Mon compte',
     headerAccount_EN: 'My account',
 
-    statisticsLoading_FR: 'Chargement de vos statistiques en cours ...',
-    statisticsLoading_EN: 'Loading your statistics in progress ...',
+    statisticsLoading_FR: 'Chargement de vos statistiques en cours',
+    statisticsLoading_EN: 'Loading your statistics in progress',
 
 }
