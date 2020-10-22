@@ -1,5 +1,6 @@
 import { TEXT_LOCALIZATION } from '../configuration/Textocalization';
 import { secureConstants } from './secureConstants';
+import { environment } from '../../environments/environment';
 
 export const localizeTexts = (language: string, arrayOfTexts: string[]) : string[] => {
 
@@ -60,8 +61,8 @@ export const getUrlCloudFuncions = (url: string): string => {
     switch (url) {
 
         case 'URL_CREATE_CUSTOM_TOKEN':
-            return secureConstants.REMOTE ? secureConstants.URL_CREATE_CUSTOM_TOKEN_REMOTE : secureConstants.URL_CREATE_CUSTOM_TOKEN_LOCAL;
+            return environment.production ? secureConstants.URL_CREATE_CUSTOM_TOKEN_REMOTE : secureConstants.URL_CREATE_CUSTOM_TOKEN_LOCAL;
         case 'URL_VALID_TOKEN':
-            return secureConstants.REMOTE ? secureConstants.URL_VALID_TOKEN_REMOTE : secureConstants.URL_VALID_TOKEN_LOCAL;
+            return environment.production ? secureConstants.URL_VALID_TOKEN_REMOTE : secureConstants.URL_VALID_TOKEN_LOCAL;
     }
 }
