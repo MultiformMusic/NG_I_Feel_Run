@@ -9,7 +9,7 @@ import { User } from '../../../models/user';
 import { StatisticsService } from '../statistics/services/statistics.service';
 import { StatsState } from '../statistics/ngrx/stats.reducer';
 import { getLocalizeText } from 'src/app/helpers/HepersFunctions';
-import { getLanguage } from '../../../configuration/ngrx/config.reducer';
+import { generateStatistics } from '../../../helpers/StatisticsHelper';
 
 @Component({
   selector: 'app-home-connected',
@@ -71,9 +71,14 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
     const activitiesArray = await this.statsService.getUserActivities(this.user.email);
     console.log(activitiesArray);
 
+    // si pas d'activité => erreur
     if (activitiesArray === null) {
       this.store.dispatch(new statsAction.statsLoadingFailed(getLocalizeText(this.language, 'statisticsError')));
     }
+
+    // process des activités
+    generateStatistics(activitiesArray);
+
   }
 
   ngOnDestroy(): void {
