@@ -28,4 +28,4 @@ export const getIsAuthenticated = createSelector(getAuthState, fromAtuh.getIsAut
 export const getAuthInfos = createSelector(getAuthState, fromAtuh.getAuthInfos);
 
 export const getStatsState = createFeatureSelector<fromStats.StatsState>('stats');
-export const getStatsIsLoading = createSelector(getStatsState, fromStats.getStatsIsLoading);
+export const getStatsDatas = createSelector(getStatsState, fromStats.getStatsDatas);

@@ -34,5 +34,7 @@ export const TEXT_LOCALIZATION = {
 
     statisticsLoading_FR: 'Chargement de vos statistiques en cours',
     statisticsLoading_EN: 'Loading your statistics in progress',
+    statisticsError_FR: 'Une erreur est survenue, merci d\'essayez plus tard',
+    statisticsError_EN: 'An error occured, please try aggain later'
 
 }

@@ -22,6 +22,7 @@ import { HeaderComponent } from './components/connected/header/header.component'
 import { secureConstants } from './helpers/secureConstants';
 import { AttributeLocalizedDirective } from './directives/attribute-localized.directive';
 import { LoadingComponent } from './components/connected/statistics/loading/loading.component';
+import { ErrorComponent } from './components/error/error.component';
 
 const dbConfig = {
   name: secureConstants.INDEX_DB_NAME,
@@ -46,7 +47,8 @@ const dbConfig = {
     HomeConnectedComponent,
     HeaderComponent,
     AttributeLocalizedDirective,
-    LoadingComponent
+    LoadingComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

@@ -4,3 +4,9 @@
     <app-loading></app-loading>
 </ng-container>
 
+<ng-container *ngIf="!statsIsLoading && errorMessage !== null">
+    <div class="container-error">
+        <app-error [errorMessage]="errorMessage"></app-error>
+    </div>
+</ng-container>
+
