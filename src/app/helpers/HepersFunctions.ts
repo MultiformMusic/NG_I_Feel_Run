@@ -52,6 +52,48 @@ export const getTextFromFirebaseError = (codeError: string): string => {
 
 /**
  * 
+ * Converti un temps de type HH:mm:ss en secondes
+ * 
+ * @param time 
+ */
+export const convertDateStringToSeconds = (time: string): number => {
+    
+    const arrayTime = time.split(':');
+    const timeSeconds = parseInt(arrayTime[0]) * 3600 + parseInt(arrayTime[1]) * 60 + parseInt(arrayTime[2]);
+
+    return timeSeconds;
+}
+
+/**
+ * 
+ * Converti un temps en secondes en HH:mm:ss
+ * 
+ * @param time 
+ */
+export const convertTimeSecondsToString = (time: number): string => {
+
+    var h, m, s, result='';
+    // HOURs
+    h = Math.floor(time/3600);
+    time -= h*3600;
+    if(h){
+        result = h<10 ? '0'+h+':' : h+':';
+    }
+    // MINUTEs
+    m = Math.floor(time/60);
+    time -= m*60;
+    result += m<10 ? '0'+m+':' : m+':';
+    // SECONDs
+    s=time%60;
+    result += s<10 ? '0'+s : s;
+
+    if (result.length === 5) result =  "00:" + result;
+
+    return result;
+}
+
+/**
+ * 
  * Retourne l'url de la cloud function suivant qu'on est config en remote ou non
  * 
  * @param url 

@@ -1,7 +1,7 @@
 
 import { Activity } from '../models/Activity';
 import { ActivityDoc } from '../models/ActivityDoc';
-import { ActivitiesEnum } from './ActivitiesEnum';
+import { convertDateStringToSeconds, convertTimeSecondsToString } from './HepersFunctions';
 
 export const generateStatistics = (datas: [ActivityDoc]) => {
 
@@ -63,15 +63,32 @@ const processActivities = (type: string, activities: [Activity]) => {
     // timeStartActivity: 1601478721690
 
     let averageSpeed = 0;
-    let averageTime = 0;
     let totalDistance = 0;
     let totalCalories = 0;
-    let numberOfActivities = 0;
+    let totalTime = 0;
     let numberCompetition = 0;
-    let cityStarts: [string];
+    let cityStarts: string[] = [];
 
     for (const activity of activities) {
 
+        averageSpeed += activity.averageSpeed;
+        totalDistance += activity.distance;
+        totalCalories += activity.calories ? activity.calories : 0;
+        numberCompetition += activity.competition ? 1 : 0;
+
+        if (!cityStarts.includes(activity.cityStart)) cityStarts.push(activity.cityStart);
+
+        // temps
+        totalTime = totalTime + convertDateStringToSeconds(activity.chrono);
     }
+
+    averageSpeed = averageSpeed / activities.length;
+    const averageDistance = totalDistance / activities.length;
+    const averageTime = Math.round(totalTime / activities.length);
+
+    const totalTimeString = convertTimeSecondsToString(totalTime);
+    const averageTimeString = convertTimeSecondsToString(averageTime);
+
+    console.log("fin");
     
 }
