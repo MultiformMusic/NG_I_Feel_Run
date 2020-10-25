@@ -10,6 +10,7 @@ import { StatisticsService } from '../statistics/services/statistics.service';
 import { StatsState } from '../statistics/ngrx/stats.reducer';
 import { getLocalizeText } from 'src/app/helpers/HepersFunctions';
 import { generateStatistics } from '../../../helpers/StatisticsHelper';
+import { ActivityTypeStats } from '../../../models/ActivityTypeStats';
 
 @Component({
   selector: 'app-home-connected',
@@ -22,7 +23,7 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
   private storeSubStats: Subscription;
   private storeSubConfig: Subscription;
 
-  private language: string;
+  language: string;
 
   isAuthenticated: boolean;
   user: User;
@@ -53,12 +54,6 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
         this.errorMessage = statsDatas.errorMessage;
       }
     )
-
-    // setTimeout(() => {
-
-    //   this.store.dispatch(new statsAction.statsLoadingFailed('Error message'));
-    // }, 2000);
-
   }
 
   /**
@@ -77,8 +72,13 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
     }
 
     // process des activités
-    generateStatistics(activitiesArray);
+    const statsByTypeActivity: ActivityTypeStats[] = generateStatistics(activitiesArray);
 
+    setTimeout(() => {
+
+      this.store.dispatch(new statsAction.statsLoadingOk(statsByTypeActivity));
+
+    }, 2500);
   }
 
   ngOnDestroy(): void {
