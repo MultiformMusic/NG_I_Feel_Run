@@ -2,6 +2,7 @@
 import { Activity } from '../models/Activity';
 import { ActivityDoc } from '../models/ActivityDoc';
 import { convertDateStringToSeconds, convertTimeSecondsToString } from './HepersFunctions';
+import { ActivityTypeStats } from '../models/ActivityTypeStats';
 
 export const generateStatistics = (datas: [ActivityDoc]) => {
 
@@ -36,14 +37,27 @@ export const generateStatistics = (datas: [ActivityDoc]) => {
         }
     }
 
-    console.log(mapActivtiesByType);
+    // construction du tableau des stats par activité
+    // le tableau est triè suivant l'activité qui a le plus d'items au moins
+    let activityTypeStats: ActivityTypeStats[] = [];
 
     for (let [key, value] of mapActivtiesByType) {
-        processActivities(key, value[key]);      
+        activityTypeStats.push(processActivities(key, value[key]));      
     }
+
+    activityTypeStats.sort((a, b) => b.numberActivities - a.numberActivities);
+
+    return activityTypeStats;
 }
 
-const processActivities = (type: string, activities: [Activity]) => {
+/**
+ * 
+ * Calcule les infos pour un type d'activité donnée et les données (tableau d'activité)
+ * 
+ * @param type 
+ * @param activities 
+ */
+const processActivities = (type: string, activities: [Activity]): ActivityTypeStats => {
 
     console.log("processActivities " + type + " -- activities = " + activities.length); 
 
@@ -62,14 +76,18 @@ const processActivities = (type: string, activities: [Activity]) => {
     // placeName: ""
     // timeStartActivity: 1601478721690
 
+    const numberActivities = activities.length;
     let averageSpeed = 0;
     let totalDistance = 0;
     let totalCalories = 0;
     let totalTime = 0;
     let numberCompetition = 0;
     let cityStarts: string[] = [];
+    let maxDinivele = 0;
+    let dateMin = '';
+    let dateMax = ''
 
-    for (const activity of activities) {
+    for (const [i, activity] of activities.entries()) {
 
         averageSpeed += activity.averageSpeed;
         totalDistance += activity.distance;
@@ -80,8 +98,18 @@ const processActivities = (type: string, activities: [Activity]) => {
 
         // temps
         totalTime = totalTime + convertDateStringToSeconds(activity.chrono);
+
+        // denivelé
+        if (maxDinivele < activity.heightDifference) maxDinivele = activity.heightDifference;
+
+        // date min/max
+        if (i === 0) dateMin = activity.date;
+        if ( i === numberActivities - 1) dateMax = activity.date;
+
     }
 
+    cityStarts.sort();
+    
     averageSpeed = averageSpeed / activities.length;
     const averageDistance = totalDistance / activities.length;
     const averageTime = Math.round(totalTime / activities.length);
@@ -89,6 +117,23 @@ const processActivities = (type: string, activities: [Activity]) => {
     const totalTimeString = convertTimeSecondsToString(totalTime);
     const averageTimeString = convertTimeSecondsToString(averageTime);
 
-    console.log("fin");
+    const activityTypeStats: ActivityTypeStats = {
+
+        type,
+        numberActivities,
+        dateMin,
+        dateMax,
+        cityStarts,
+        totalDistance,
+        averageDistance,
+        totalTimeString,
+        averageTimeString,
+        totalCalories,
+        numberCompetition,
+        activities
+
+    }
+
+    return activityTypeStats;
     
 }
