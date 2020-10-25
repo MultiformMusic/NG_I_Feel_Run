@@ -24,6 +24,9 @@ import { AttributeLocalizedDirective } from './directives/attribute-localized.di
 import { LoadingComponent } from './components/connected/statistics/loading/loading.component';
 import { ErrorComponent } from './components/error/error.component';
 import { HomesStatsComponent } from './components/connected/statistics/homes-stats/homes-stats.component';
+import { ResumeComponent } from './components/connected/statistics/resume/resume.component';
+import { LastActivityComponent } from './components/connected/statistics/last-activity/last-activity.component';
+import { AllActivitiesComponent } from './components/connected/statistics/all-activities/all-activities.component';
 
 const dbConfig = {
   name: secureConstants.INDEX_DB_NAME,
@@ -50,7 +53,10 @@ const dbConfig = {
     AttributeLocalizedDirective,
     LoadingComponent,
     ErrorComponent,
-    HomesStatsComponent
+    HomesStatsComponent,
+    ResumeComponent,
+    LastActivityComponent,
+    AllActivitiesComponent
   ],
   imports: [
     BrowserModule,
