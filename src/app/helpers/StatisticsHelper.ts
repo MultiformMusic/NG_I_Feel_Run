@@ -4,7 +4,13 @@ import { ActivityDoc } from '../models/ActivityDoc';
 import { convertDateStringToSeconds, convertTimeSecondsToString } from './HepersFunctions';
 import { ActivityTypeStats } from '../models/ActivityTypeStats';
 
-export const generateStatistics = (datas: [ActivityDoc]) => {
+/**
+ * 
+ * Genere les statistiques classées par type d'activité
+ * 
+ * @param datas 
+ */
+export const generateStatistics = (datas: [ActivityDoc]): ActivityTypeStats[] => {
 
     let activitiesStats = [{}];
     let mapActivtiesByType = new Map();
