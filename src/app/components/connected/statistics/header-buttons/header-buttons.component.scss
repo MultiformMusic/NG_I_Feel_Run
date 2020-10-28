@@ -1,0 +1,9 @@
+.icon {
+    width: 3rem;
+    height: auto;
+    transition: all ease .3s;
+
+    &:hover {
+        opacity: .6;
+    }
+}

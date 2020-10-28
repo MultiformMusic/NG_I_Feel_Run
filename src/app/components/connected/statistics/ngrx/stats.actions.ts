@@ -6,6 +6,7 @@ import { ActivityTypeStats } from '../../../../models/ActivityTypeStats';
 export const STATS_IS_LOADING = '[STATS] STATS_IS_LOADING';
 export const STATS_LOADING_FAILED = '[STATS] STATS_LOADING_FAILED';
 export const STATS_LOADING_OK = '[STATS] STATS_LOADING_OK';
+export const SET_ACTIVITY_TYPE_ACTIVE = '[STATS] SET_ACTIVITY_TYPE_ACTIVE';
 
 export class statsIsLoading implements Action {
 
@@ -27,8 +28,16 @@ export class statsLoadingOk implements Action {
 
     readonly type = STATS_LOADING_OK;
 
-    constructor(public payload: ActivityTypeStats[]) {}
+    constructor(public payload: {stats: ActivityTypeStats[], activityTypeActive: string}) {}
 
 }
 
-export type StatsActions = statsIsLoading | statsLoadingFailed | statsLoadingOk;
+export class setActivityTypeActive implements Action {
+
+    readonly type = SET_ACTIVITY_TYPE_ACTIVE;
+
+    constructor(public payload: string) {}
+
+}
+
+export type StatsActions = statsIsLoading | statsLoadingFailed | statsLoadingOk | setActivityTypeActive;

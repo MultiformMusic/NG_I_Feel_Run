@@ -12,27 +12,16 @@ import { StatsState } from '../ngrx/stats.reducer';
 })
 export class HomesStatsComponent implements OnInit, OnDestroy {
 
-  private storeSubStats: Subscription;
-  private statsByActivityType: ActivityTypeStats[];
-
   @Input() language: string;
 
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit(): void {
 
-      // connexion au state stats
-      this.storeSubStats = this.store.select(fromRoot.getStatsDatas).subscribe(
-        (statsDatas: StatsState) => {
-          this.statsByActivityType = statsDatas.statsByActivityType;
-        }
-      )
   }
 
   ngOnDestroy(): void {
-    if (this.storeSubStats) {
-      this.storeSubStats.unsubscribe();
-    }
+
   }
 
 }

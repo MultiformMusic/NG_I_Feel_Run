@@ -27,6 +27,7 @@ import { HomesStatsComponent } from './components/connected/statistics/homes-sta
 import { ResumeComponent } from './components/connected/statistics/resume/resume.component';
 import { LastActivityComponent } from './components/connected/statistics/last-activity/last-activity.component';
 import { AllActivitiesComponent } from './components/connected/statistics/all-activities/all-activities.component';
+import { HeaderButtonsComponent } from './components/connected/statistics/header-buttons/header-buttons.component';
 
 const dbConfig = {
   name: secureConstants.INDEX_DB_NAME,
@@ -56,7 +57,8 @@ const dbConfig = {
     HomesStatsComponent,
     ResumeComponent,
     LastActivityComponent,
-    AllActivitiesComponent
+    AllActivitiesComponent,
+    HeaderButtonsComponent
   ],
   imports: [
     BrowserModule,

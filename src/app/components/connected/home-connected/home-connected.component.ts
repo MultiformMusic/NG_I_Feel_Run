@@ -74,11 +74,18 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
     // process des activités
     const statsByTypeActivity: ActivityTypeStats[] = generateStatistics(activitiesArray);
 
+    let activityTypeMaxActivities: ActivityTypeStats = null;
+    for (const activityType of statsByTypeActivity) {
+      if (activityTypeMaxActivities === null || activityTypeMaxActivities.activities.length < activityType.activities.length) {
+        activityTypeMaxActivities = activityType;
+      }
+    }
+
     setTimeout(() => {
 
-      this.store.dispatch(new statsAction.statsLoadingOk(statsByTypeActivity));
+      this.store.dispatch(new statsAction.statsLoadingOk({stats: statsByTypeActivity, activityTypeActive: activityTypeMaxActivities.type}));
 
-    }, 2500);
+    }, 1000);
   }
 
   ngOnDestroy(): void {

@@ -12,7 +12,28 @@
 
 <ng-container *ngIf="!statsIsLoading && errorMessage === null">
     <div class="container-stats">
-        <app-homes-stats [language]="language"></app-homes-stats>
+        <div class="container-home-stats">
+            <div class="column">
+                
+                <div class="row ml-0 justify-content-center align-items-center" style="width: 90vw; height: 8vh">
+                    <stats-header-buttons></stats-header-buttons>
+                </div>
+        
+                <div class="row ml-0 align-items-center" style="width: 90vw; height: 35vh">
+                    <div class="row col-md-6 justify-content-center ml-0">
+                        <stats-resume></stats-resume>
+                    </div>
+                    <div class="row col-md-6 justify-content-center">
+                        <span style="background-color: wheat;">Toto R</span>
+                    </div>
+                </div>
+        
+                <div class="row ml-0 justify-content-center align-items-center" style="width: 90vw; height: 45vh;  background-color: rgb(129, 129, 172);">
+                    <span>Toto</span>
+                </div>
+        
+            </div>
+        </div>
     </div>
 </ng-container>
 
