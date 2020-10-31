@@ -1,7 +1,27 @@
 <div class="card shadow-lg text-center" style="width: 100%; background-color: rgb(136, 73, 32);">
     <div class="card-body text-white">
-      <h5 class="card-title">{{ativityDatas.type}}</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <h5 class="card-title"><app-localized-text text="statisticsNumberActivities"></app-localized-text> {{ativityDatas.activities.length}}</h5>
+      <div class="column">
+        <div class="row">
+            <div class="col-6">
+                <app-localized-text text="statisticsTotalDistance"></app-localized-text>
+                {{ativityDatas.totalDistance}}
+            </div>
+            <div class="col-6">
+                <app-localized-text text="statisticsAverageDistance"></app-localized-text>
+                {{ativityDatas.averageDistance}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <img src="../../../../assets/icon_stats_distance.png" class="icon">
+                {{ativityDatas.totalDistance}}
+            </div>
+            <div class="col-6">
+                <img src="../../../../assets/icon_stats_distance.png" class="icon">
+                {{ativityDatas.totalDistance}}
+            </div>
+        </div>
+      </div>
     </div>
   </div>

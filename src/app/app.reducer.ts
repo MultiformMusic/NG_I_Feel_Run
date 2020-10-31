@@ -22,6 +22,7 @@ export const reducers: ActionReducerMap<State> = {
 // sélecteur => méthode retournant partie du state
 export const getConfigState = createFeatureSelector<fromConfig.ConfigState>('config');
 export const getLanguage = createSelector(getConfigState, fromConfig.getLanguage);
+export const getUnits = createSelector(getConfigState, fromConfig.getUnits);
 
 export const getAuthState = createFeatureSelector<fromAtuh.AuthState>('auth');
 export const getIsAuthenticated = createSelector(getAuthState, fromAtuh.getIsAuthenticated);

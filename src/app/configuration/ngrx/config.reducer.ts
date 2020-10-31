@@ -5,12 +5,19 @@ import { ConfigActions, SET_LANGUAGE } from './config.actions';
 export interface ConfigState {
 
     language: string;
+    units: {
+        distance: string;
+
+    }
 }
 
 // state initial
 const INITIAL_STATE: ConfigState = {
 
-    language: navigator.language.substr(0, 2)
+    language: navigator.language.substr(0, 2),
+    units: {
+        distance: 'km'
+    }
 }
 
 // reducer config => on modifie le state suivant payload
@@ -34,3 +41,4 @@ export function configReducer(state = INITIAL_STATE, action: ConfigActions) {
 
 // function d'aide pour accèder à l'état du state
 export const getLanguage = (state: ConfigState) => state.language;
+export const getUnits = (state: ConfigState) => state.units;

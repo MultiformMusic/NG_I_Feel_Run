@@ -117,7 +117,7 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
     cityStarts.sort();
     
     averageSpeed = averageSpeed / activities.length;
-    const averageDistance = totalDistance / activities.length;
+    const averageDistance = Math.round(totalDistance / activities.length);
     const averageTime = Math.round(totalTime / activities.length);
 
     const totalTimeString = convertTimeSecondsToString(totalTime);
