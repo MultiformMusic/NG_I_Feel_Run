@@ -42,5 +42,7 @@ export const TEXT_LOCALIZATION = {
     statisticsTotalDistance_EN: 'Total Distance : ',
     statisticsAverageDistance_FR: 'Distance moyenne : ',
     statisticsAverageDistance_EN: 'Average Distance : ',
+    statisticsTotalTime_FR: 'Temps total : ',
+    statisticsTotalTime_EN: 'Total time : ',
 
 }

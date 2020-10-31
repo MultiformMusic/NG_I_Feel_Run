@@ -1,15 +1,15 @@
-<div class="card shadow-lg text-center" style="width: 100%; background-color: rgb(136, 73, 32);">
+<div class="card shadow-lg text-center" style="background-color: rgb(136, 73, 32);">
     <div class="card-body text-white">
       <h5 class="card-title"><app-localized-text text="statisticsNumberActivities"></app-localized-text> {{ativityDatas.activities.length}}</h5>
       <div class="column">
         <div class="row">
-            <div class="col-6">
+            <div class="p-2">
                 <app-localized-text text="statisticsTotalDistance"></app-localized-text>
-                {{ativityDatas.totalDistance}}
+                <app-converter [value]="ativityDatas.totalDistance" type="distance"></app-converter>
             </div>
-            <div class="col-6">
+            <div class="p-2">
                 <app-localized-text text="statisticsAverageDistance"></app-localized-text>
-                {{ativityDatas.averageDistance}}
+                <app-converter [value]="ativityDatas.averageDistance" type="distance"></app-converter>
             </div>
         </div>
         <div class="row">

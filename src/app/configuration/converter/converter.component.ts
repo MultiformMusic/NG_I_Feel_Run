@@ -2,6 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromRoot from '../../app.reducer';
+import { Units } from '../../models/Units';
 
 @Component({
   selector: 'app-converter',
@@ -12,7 +13,7 @@ export class ConverterComponent implements OnInit, OnDestroy {
 
   @Input() value: string;
   @Input() type: string;
-  private units: {};
+  private units: Units;
   convertValue: string = '';
 
   private storeConfigSub: Subscription;
@@ -22,7 +23,16 @@ export class ConverterComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.storeConfigSub = this.store.select(fromRoot.getUnits).subscribe(
-      (units: {}) => this.units = units
+      (units: Units) => {
+        this.units = units;
+        if (this.type === "distance") {
+          if (this.units.distance === 'km') {
+            this.convertValue = Math.round(parseInt(this.value) / 1000).toString() + " " + units.distance;
+          } else {
+            this.convertValue = this.value;
+          }
+        }
+      }
     )
   }
 

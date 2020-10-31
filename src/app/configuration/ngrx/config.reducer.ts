@@ -1,14 +1,12 @@
 import { ConfigActions, SET_LANGUAGE } from './config.actions';
+import { Units } from '../../models/Units';
 
 
 // interface state du reducer
 export interface ConfigState {
 
     language: string;
-    units: {
-        distance: string;
-
-    }
+    units: Units
 }
 
 // state initial
