@@ -1,25 +1,48 @@
-<div class="card shadow-lg text-center" style="background-color: rgb(136, 73, 32);">
+<div class="card shadow-lg text-center" style="background-color: rgb(119, 60, 21);">
     <div class="card-body text-white">
-      <h5 class="card-title"><app-localized-text text="statisticsNumberActivities"></app-localized-text> {{ativityDatas.activities.length}}</h5>
+      <h5 class="card-title">
+        <span class=text-title>
+            <app-localized-text text="statisticsNumberActivities"></app-localized-text> 
+        </span>
+        <span class="text-value">
+            {{ativityDatas.activities.length}}
+        </span>
+      </h5>
       <div class="column">
         <div class="row">
             <div class="p-2">
-                <app-localized-text text="statisticsTotalDistance"></app-localized-text>
-                <app-converter [value]="ativityDatas.totalDistance" type="distance"></app-converter>
+                <span class=text-title>
+                    <app-localized-text text="statisticsTotalDistance"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    <app-converter [value]="ativityDatas.totalDistance" type="distance"></app-converter>
+                </span>
             </div>
             <div class="p-2">
-                <app-localized-text text="statisticsAverageDistance"></app-localized-text>
-                <app-converter [value]="ativityDatas.averageDistance" type="distance"></app-converter>
+                <span class=text-title>
+                    <app-localized-text text="statisticsAverageDistance"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    <app-converter [value]="ativityDatas.averageDistance" type="distance"></app-converter>
+                </span>
             </div>
         </div>
         <div class="row">
             <div class="col-6">
-                <app-localized-text text="statisticsCalories"></app-localized-text>
-                {{ativityDatas.totalCalories}}
+                <span class=text-title>
+                    <app-localized-text text="statisticsTotalTime"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    {{ativityDatas.totalTimeString}}
+                </span>
             </div>
             <div class="col-6">
-                <app-localized-text text="statisticsCalories"></app-localized-text>
-                {{ativityDatas.totalCalories}}
+                <span class=text-title>
+                    <app-localized-text text="statisticsCalories"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    {{ativityDatas.totalCalories}}
+                </span>
             </div>
         </div>
       </div>

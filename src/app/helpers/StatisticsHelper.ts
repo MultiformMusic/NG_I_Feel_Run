@@ -123,7 +123,7 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
     const totalTimeString = convertTimeSecondsToString(totalTime);
     const averageTimeString = convertTimeSecondsToString(averageTime);
 
-    averageSpeed = 0;
+    averageSpeed = totalDistance / totalTime;
 
     const activityTypeStats: ActivityTypeStats = {
 

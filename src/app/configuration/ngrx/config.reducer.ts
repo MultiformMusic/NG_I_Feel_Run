@@ -14,7 +14,8 @@ const INITIAL_STATE: ConfigState = {
 
     language: navigator.language.substr(0, 2),
     units: {
-        distance: 'km'
+        distance: 'km',
+        speed: 'km/h'
     }
 }
 
