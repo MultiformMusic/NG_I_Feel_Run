@@ -8,6 +8,7 @@ export interface ActivityTypeStats {
     cityStarts: string[];
     totalDistance: number;
     averageDistance: number;
+    averageSpeed: number;
     totalTimeString: string;
     averageTimeString: string;
     totalCalories: number;

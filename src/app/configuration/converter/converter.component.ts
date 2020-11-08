@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { ClassField } from '@angular/compiler';
+import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromRoot from '../../app.reducer';
@@ -9,7 +10,7 @@ import { Units } from '../../models/Units';
   templateUrl: './converter.component.html',
   styleUrls: ['./converter.component.scss']
 })
-export class ConverterComponent implements OnInit, OnDestroy {
+export class ConverterComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() value: string;
   @Input() type: string;
@@ -34,6 +35,21 @@ export class ConverterComponent implements OnInit, OnDestroy {
         }
       }
     )
+  }
+
+  ngOnChanges(): void {
+
+    if (this.units) {
+      
+      if (this.type === "distance") {
+        if (this.units.distance === 'km') {
+          this.convertValue = (parseInt(this.value) / 1000).toFixed(1) + " " + this.units.distance;
+        } else {
+          this.convertValue = this.value;
+        }
+      }
+    }
+
   }
 
   ngOnDestroy(): void {

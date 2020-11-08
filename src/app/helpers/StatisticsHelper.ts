@@ -123,6 +123,8 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
     const totalTimeString = convertTimeSecondsToString(totalTime);
     const averageTimeString = convertTimeSecondsToString(averageTime);
 
+    averageSpeed = 0;
+
     const activityTypeStats: ActivityTypeStats = {
 
         type,
@@ -132,6 +134,7 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
         cityStarts,
         totalDistance,
         averageDistance,
+        averageSpeed,
         totalTimeString,
         averageTimeString,
         totalCalories,
