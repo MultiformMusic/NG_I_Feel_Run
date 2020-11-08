@@ -27,7 +27,7 @@ export class ConverterComponent implements OnInit, OnDestroy {
         this.units = units;
         if (this.type === "distance") {
           if (this.units.distance === 'km') {
-            this.convertValue = Math.round(parseInt(this.value) / 1000).toString() + " " + units.distance;
+            this.convertValue = (parseInt(this.value) / 1000).toFixed(1) + " " + units.distance;
           } else {
             this.convertValue = this.value;
           }
