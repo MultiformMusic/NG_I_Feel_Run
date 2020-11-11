@@ -9,6 +9,7 @@
         </span>
       </h5>
       <div class="column">
+
         <div class="row">
             <div class="p-2">
                 <span class=text-title>
@@ -27,6 +28,7 @@
                 </span>
             </div>
         </div>
+
         <div class="row">
             <div class="col-6">
                 <span class=text-title>
@@ -45,6 +47,19 @@
                 </span>
             </div>
         </div>
+
+        <div class="row">
+            <div class="p-2">
+                <span class=text-title>
+                    <app-localized-text text="statisticsAverageSpeed"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    <app-converter [value]="ativityDatas.averageSpeed" type="speed"></app-converter>
+                </span>
+            </div>
+
+        </div>
+
       </div>
     </div>
   </div>

@@ -26,13 +26,7 @@ export class ConverterComponent implements OnInit, OnChanges, OnDestroy {
     this.storeConfigSub = this.store.select(fromRoot.getUnits).subscribe(
       (units: Units) => {
         this.units = units;
-        if (this.type === "distance") {
-          if (this.units.distance === 'km') {
-            this.convertValue = (parseInt(this.value) / 1000).toFixed(1) + " " + units.distance;
-          } else {
-            this.convertValue = this.value;
-          }
-        }
+        this.doConversion();
       }
     )
   }
@@ -40,16 +34,28 @@ export class ConverterComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(): void {
 
     if (this.units) {
-      
-      if (this.type === "distance") {
-        if (this.units.distance === 'km') {
-          this.convertValue = (parseInt(this.value) / 1000).toFixed(1) + " " + this.units.distance;
-        } else {
-          this.convertValue = this.value;
-        }
-      }
+      this.doConversion();
     }
 
+  }
+
+  private doConversion() {
+
+    if (this.type === "distance") {
+
+      if (this.units.distance === 'km') {
+        this.convertValue = (parseInt(this.value) / 1000).toFixed(1) + " " + this.units.distance;
+      } else {
+        this.convertValue = this.value;
+      }
+
+    } else if (this.type === "speed") {
+      if (this.units.speed === "km/h") {
+        this.convertValue = (parseFloat(this.value) * 3.6).toFixed(2) + " " + this.units.speed;
+      } else {
+        this.convertValue = this.value; 
+      }
+    }
   }
 
   ngOnDestroy(): void {
