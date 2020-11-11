@@ -16,10 +16,6 @@
     align-items: center;
 }
 
-
-
-
-
 .container-home-stats {
     background: linear-gradient(rgba(102, 65, 65, 0.3), rgba(0,0,0, .5));
     background-color: rgb(58, 33, 19); 
@@ -28,6 +24,11 @@
     margin-top: 15rem;
     animation: .8s linear translateFromTop;
 }
+
+.stats-resume {
+    width: 70% !important;
+}
+
 
 @keyframes translateFromTop {
     from { transform: translateY(-100vh); }

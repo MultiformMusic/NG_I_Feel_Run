@@ -9,6 +9,8 @@ export interface ActivityTypeStats {
     totalDistance: number;
     averageDistance: number;
     averageSpeed: number;
+    minSpeed: number;
+    maxSpeed: number;
     totalTimeString: string;
     averageTimeString: string;
     totalCalories: number;

@@ -84,6 +84,8 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
 
     const numberActivities = activities.length;
     let averageSpeed = 0;
+    let minSpeed = 0;
+    let maxSpeed = 0;
     let totalDistance = 0;
     let totalCalories = 0;
     let totalTime = 0;
@@ -112,11 +114,13 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
         if (i === 0) dateMin = activity.date;
         if ( i === numberActivities - 1) dateMax = activity.date;
 
+        if (minSpeed === 0 || minSpeed > activity.distance/ convertDateStringToSeconds(activity.chrono)) minSpeed = activity.distance/ convertDateStringToSeconds(activity.chrono);
+        if (maxSpeed < activity.distance/ convertDateStringToSeconds(activity.chrono)) maxSpeed = activity.distance/ convertDateStringToSeconds(activity.chrono);
+
     }
 
     cityStarts.sort();
     
-    averageSpeed = averageSpeed / activities.length;
     const averageDistance = parseFloat((totalDistance / activities.length).toFixed(1));
     const averageTime = Math.round(totalTime / activities.length);
 
@@ -135,6 +139,8 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
         totalDistance,
         averageDistance,
         averageSpeed,
+        minSpeed,
+        maxSpeed,
         totalTimeString,
         averageTimeString,
         totalCalories,

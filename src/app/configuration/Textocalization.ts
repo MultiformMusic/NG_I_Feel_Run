@@ -48,5 +48,11 @@ export const TEXT_LOCALIZATION = {
     statisticsCalories_EN: 'Calories : ',
     statisticsAverageSpeed_FR: 'Vitesse moyenne : ',
     statisticsAverageSpeed_EN: 'Average speed : ',
+    statisticsMinSpeed_FR: 'Vitesse min : ',
+    statisticsMinSpeed_EN: 'Min speed : ',
+    statisticsMaxSpeed_FR: 'Vitesse max : ',
+    statisticsMaxSpeed_EN: 'Max speed : ',
+    statisticsCompetition_FR: 'Nombre de compétitions : ',
+    statisticsCompetition_EN: 'Number of competitions : ',
 
 }

@@ -7,6 +7,10 @@
     animation: .8s linear translateFromTop;
 }
 
+.stats-resume {
+    width: 80% !important;
+}
+
 @keyframes translateFromTop {
     from { transform: translateY(-100vh); }
     to   { transform: translate(0px); }

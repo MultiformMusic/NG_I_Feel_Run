@@ -11,7 +11,7 @@
       <div class="column">
 
         <div class="row">
-            <div class="p-2">
+            <div class="col-6 p-2">
                 <span class=text-title>
                     <app-localized-text text="statisticsTotalDistance"></app-localized-text>
                 </span>
@@ -19,7 +19,7 @@
                     <app-converter [value]="ativityDatas.totalDistance" type="distance"></app-converter>
                 </span>
             </div>
-            <div class="p-2">
+            <div class="col-6 p-2">
                 <span class=text-title>
                     <app-localized-text text="statisticsAverageDistance"></app-localized-text>
                 </span>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-6 p-2">
                 <span class=text-title>
                     <app-localized-text text="statisticsTotalTime"></app-localized-text>
                 </span>
@@ -38,7 +38,7 @@
                     {{ativityDatas.totalTimeString}}
                 </span>
             </div>
-            <div class="col-6">
+            <div class="col-6 p-2">
                 <span class=text-title>
                     <app-localized-text text="statisticsCalories"></app-localized-text>
                 </span>
@@ -49,7 +49,7 @@
         </div>
 
         <div class="row">
-            <div class="p-2">
+            <div class="col-6 p-2">
                 <span class=text-title>
                     <app-localized-text text="statisticsAverageSpeed"></app-localized-text>
                 </span>
@@ -57,7 +57,33 @@
                     <app-converter [value]="ativityDatas.averageSpeed" type="speed"></app-converter>
                 </span>
             </div>
+            <div class="col-6 p-2">
+                <span class=text-title>
+                    <app-localized-text text="statisticsCompetition"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    {{ativityDatas.numberCompetition}}
+                </span>
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-6 p-2">
+                <span class=text-title>
+                    <app-localized-text text="statisticsMinSpeed"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    <app-converter [value]="ativityDatas.minSpeed" type="speed"></app-converter>
+                </span>
+            </div>
+            <div class="col-6 p-2">
+                <span class=text-title>
+                    <app-localized-text text="statisticsMaxSpeed"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    <app-converter [value]="ativityDatas.maxSpeed" type="speed"></app-converter>
+                </span>
+            </div>
         </div>
 
       </div>
