@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxIndexedDBModule } from 'ngx-indexed-db';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -71,7 +72,10 @@ const dbConfig = {
     AngularFireModule.initializeApp(environment.firebase),
     StoreModule.forRoot(reducers),
     // NgxIndexedDBModule.forRoot(dbConfig),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    AgmCoreModule.forRoot({
+      apiKey: secureConstants.MAPS_API_KEY
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
