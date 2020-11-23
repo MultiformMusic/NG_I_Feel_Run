@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Activity } from '../../../../models/Activity';
+import { GeoPoint } from '../../../../models/GeoPoint';
 
 @Component({
   selector: 'last-activity',
@@ -9,6 +10,7 @@ import { Activity } from '../../../../models/Activity';
 export class LastActivityComponent implements OnInit, OnChanges {
 
   @Input() lastActivity: Activity;
+  @Input() lastActivityGeopoints: GeoPoint[];
 
   title = 'My first AGM project';
   lat = 51.678418;

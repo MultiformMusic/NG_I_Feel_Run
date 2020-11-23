@@ -18,14 +18,21 @@
                 <div class="row ml-0 justify-content-center align-items-center" style="width: 90vw; height: 8vh">
                     <stats-header-buttons></stats-header-buttons>
                 </div>
-        
+                
                 <div class="row ml-0 align-items-center" style="width: 90vw; height: 35vh">
+                    
+                    <!-- Resume Activities -->
                     <div class="row col-md-5 justify-content-center ml-0">
                         <stats-resume [activityDatas]="activityDatas" class="stats-resume"></stats-resume>
                     </div>
+
+                    <!-- Last Activity -->
                     <div class="row col-md-7 justify-content-center">
-                        <last-activity [lastActivity]="lastActivity" class="last-activity"></last-activity>
+                        <last-activity [lastActivity]="lastActivity" [lastActivityGeopoints]="lastActivityGeopoints"  
+                                        class="last-activity">
+                        </last-activity>
                     </div>
+                    
                 </div>
         
                 <div class="row ml-0 justify-content-center align-items-center" style="width: 90vw; height: 45vh;  background-color: rgb(129, 129, 172);">
