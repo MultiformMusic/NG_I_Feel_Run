@@ -12,6 +12,7 @@ import { getLocalizeText } from 'src/app/helpers/HepersFunctions';
 import { generateStatistics } from '../../../helpers/StatisticsHelper';
 import { ActivityTypeStats } from '../../../models/ActivityTypeStats';
 import { Activity } from '../../../models/Activity';
+import { GeoPoint } from '../../../models/GeoPoint';
 
 @Component({
   selector: 'app-home-connected',
@@ -33,6 +34,7 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
 
   activityDatas: ActivityTypeStats = null;
   lastActivity: Activity;
+  lastActivityGeopoints: GeoPoint[];
 
   constructor(private store: Store<fromRoot.State>, private statsService: StatisticsService) { }
 
@@ -53,12 +55,14 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
 
     // connexion au state stats
     this.storeSubStats = this.store.select(fromRoot.getStatsDatas).subscribe(
-      (statsDatas: StatsState) => {
+      async (statsDatas: StatsState) => {
         this.statsIsLoading = statsDatas.statsIsLoading;
         this.errorMessage = statsDatas.errorMessage;
         this.activityDatas = statsDatas.statsByActivityType.filter(activity => activity.type === statsDatas.activityTypeActive)[0];
         if (this.activityDatas) {
           this.lastActivity = this.activityDatas.activities[this.activityDatas.activities.length - 1];
+          const data = await this.statsService.getActivityFromTimeStart(this.user.email, this.lastActivity.timeStartActivity);
+          this.lastActivityGeopoints = data.activityGeopoints;
         }
       }
     )

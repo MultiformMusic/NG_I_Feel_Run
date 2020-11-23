@@ -108,5 +108,7 @@ export const getUrlCloudFuncions = (url: string): string => {
             return environment.production ? secureConstants.URL_VALID_TOKEN_REMOTE : secureConstants.URL_VALID_TOKEN_LOCAL;
         case 'URL_ACTIVITIES_WITHOUT_GEO':
             return environment.production ? secureConstants.URL_ACTIVITIES_WITHOUT_GEO_REMOTE : secureConstants.URL_ACTIVITIES_WITHOUT_GEO_LOCAL;
+        case 'URL_ACTIVITY_FROM_TIMESTART':
+            return environment.production ? secureConstants.URL_ACTIVITY_FROM_TIMESTART_REMOTE : secureConstants.URL_ACTIVITY_FROM_TIMESTART_LOCAL;
     }
 }

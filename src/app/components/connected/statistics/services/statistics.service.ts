@@ -20,16 +20,38 @@ export class StatisticsService {
     try {
       
       const res = await this.httpClient.post<any>(getUrlCloudFuncions('URL_ACTIVITIES_WITHOUT_GEO'), JSON.stringify({user: {email}})).toPromise(); 
-      console.log(res);
       if (res && res.message === 'NOK') return null;
 
-      //return null;
       return res.datas;
 
     } catch (error) {
       console.log(error);
       return null;
     }
+  }
+
+  /**
+   * 
+   * Récupère l'activité avec timestart
+   * 
+   * @param email 
+   * @param timeStart 
+   */
+  async getActivityFromTimeStart(email: string, timestart: number) {
+
+    try {
+
+      const res = await this.httpClient.post<any>(getUrlCloudFuncions('URL_ACTIVITY_FROM_TIMESTART'), JSON.stringify({email: email, timestart: timestart})).toPromise(); 
+      if (res && res.message === 'NOK') return null;
+
+      //return null;
+      return res.datas;
+      
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+
   }
 
 }
