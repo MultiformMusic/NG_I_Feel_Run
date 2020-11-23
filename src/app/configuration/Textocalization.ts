@@ -54,5 +54,9 @@ export const TEXT_LOCALIZATION = {
     statisticsMaxSpeed_EN: 'Max speed : ',
     statisticsCompetition_FR: 'Nombre de compétitions : ',
     statisticsCompetition_EN: 'Number of competitions : ',
+    statisticsFrom_FR: 'du ',
+    statisticsFrom_EN: 'from ',
+    statisticsTo_FR: 'au ',
+    statisticsTo_EN: 'to ',
 
 }

@@ -7,6 +7,12 @@
         <span class="text-value">
             {{activityDatas.activities.length}}
         </span>
+        <div class="pt-2" style="font-size: 0.8rem;">
+            <app-localized-text text="statisticsFrom"></app-localized-text>
+            <app-converter [value]="activityDatas.dateMin" type="date"></app-converter>
+            <app-localized-text text="statisticsTo"></app-localized-text>
+            <app-converter [value]="activityDatas.dateMax" type="date"></app-converter>
+        </div>
       </h5>
       <div class="column">
 
