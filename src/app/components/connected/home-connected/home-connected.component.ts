@@ -11,6 +11,7 @@ import { StatsState } from '../statistics/ngrx/stats.reducer';
 import { getLocalizeText } from 'src/app/helpers/HepersFunctions';
 import { generateStatistics } from '../../../helpers/StatisticsHelper';
 import { ActivityTypeStats } from '../../../models/ActivityTypeStats';
+import { Activity } from '../../../models/Activity';
 
 @Component({
   selector: 'app-home-connected',
@@ -29,6 +30,9 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
   user: User;
   statsIsLoading: Boolean;
   errorMessage: string = null;
+
+  activityDatas: ActivityTypeStats = null;
+  lastActivity: Activity;
 
   constructor(private store: Store<fromRoot.State>, private statsService: StatisticsService) { }
 
@@ -52,6 +56,10 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
       (statsDatas: StatsState) => {
         this.statsIsLoading = statsDatas.statsIsLoading;
         this.errorMessage = statsDatas.errorMessage;
+        this.activityDatas = statsDatas.statsByActivityType.filter(activity => activity.type === statsDatas.activityTypeActive)[0];
+        if (this.activityDatas) {
+          this.lastActivity = this.activityDatas.activities[this.activityDatas.activities.length - 1];
+        }
       }
     )
   }
@@ -64,7 +72,6 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
   async loadStatistics() {
 
     const activitiesArray = await this.statsService.getUserActivities(this.user.email);
-    console.log(activitiesArray);
 
     // si pas d'activité => erreur
     if (activitiesArray === null) {

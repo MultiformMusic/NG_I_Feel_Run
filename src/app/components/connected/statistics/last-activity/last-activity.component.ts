@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Activity } from '../../../../models/Activity';
 
 @Component({
   selector: 'last-activity',
   templateUrl: './last-activity.component.html',
   styleUrls: ['./last-activity.component.scss']
 })
-export class LastActivityComponent implements OnInit {
+export class LastActivityComponent implements OnInit, OnChanges {
+
+  @Input() lastActivity: Activity;
 
   title = 'My first AGM project';
   lat = 51.678418;
@@ -16,4 +19,7 @@ export class LastActivityComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges() {
+    console.log(this.lastActivity)
+  }
 }
