@@ -1,16 +1,29 @@
 
 <div class="card shadow-lg text-center container" style="background-color: transparent; height: 280px;">
 
-    <div class="col-7 ml-0">
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]='15' [mapTypeId]="'satellite'" [controlSize]='20'>
+    <div class="col-6 ml-0">
+
+        <agm-map [zoom]="zoom" [fitBounds]="true" [latitude]="latStart" [longitude]="lngStart" [mapTypeId]="'satellite'" [controlSize]='20'>
+            
             <agm-map-type-control></agm-map-type-control>
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+
+            <agm-marker  [latitude]="latStart" [longitude]="lngStart" [iconUrl]="iconUrlStart"></agm-marker>
+            <agm-marker [latitude]="latStop" [longitude]="lngStop" [iconUrl]="iconUrlStop"></agm-marker>
+            
+            <agm-polyline [strokeColor]="'#2196f3'"> 
+                <agm-polyline-point [agmFitBounds]="true"  *ngFor="let geopoint of lastActivityGeopoints" 
+                [latitude]="geopoint.latitude" 
+                [longitude]="geopoint.longitude"> 
+            </agm-polyline-point> 
+           </agm-polyline> 
+
         </agm-map> 
+        
     </div>
-    <div class="col-5 ml-0">
-        <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-        </agm-map>   
+    <div class="col-6 ml-0">
+        <!-- <agm-map [latitude]="lat" [longitude]="lng">
+            <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
+        </agm-map>    -->
     </div>
 
 </div>

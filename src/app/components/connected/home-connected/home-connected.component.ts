@@ -59,7 +59,6 @@ export class HomeConnectedComponent implements OnInit, OnDestroy {
         this.statsIsLoading = statsDatas.statsIsLoading;
         this.errorMessage = statsDatas.errorMessage;
         this.activityDatas = statsDatas.statsByActivityType.filter(activity => activity.type === statsDatas.activityTypeActive)[0];
-        debugger
         if (this.activityDatas) {
           this.lastActivity = this.activityDatas.activities[this.activityDatas.activities.length - 1];
           const data = await this.statsService.getActivityFromTimeStart(this.user.email, this.lastActivity.timeStartActivity);
