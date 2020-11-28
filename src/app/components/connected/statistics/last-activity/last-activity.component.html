@@ -9,21 +9,32 @@
 
             <agm-marker  [latitude]="latStart" [longitude]="lngStart" [iconUrl]="iconUrlStart"></agm-marker>
             <agm-marker [latitude]="latStop" [longitude]="lngStop" [iconUrl]="iconUrlStop"></agm-marker>
-            
-            <agm-polyline [strokeColor]="'#2196f3'"> 
-                <agm-polyline-point [agmFitBounds]="true"  *ngFor="let geopoint of lastActivityGeopoints" 
-                [latitude]="geopoint.latitude" 
-                [longitude]="geopoint.longitude"> 
-            </agm-polyline-point> 
+
+            <agm-polyline *ngFor="let polyline of polylines;let i = index;" [strokeColor]="polyline && polyline.color" > 
+
+                <ng-container *ngIf="polyline">
+
+                    <agm-polyline-point [agmFitBounds]="true" 
+                                        [latitude]="polyline.path[0].latitude" 
+                                        [longitude]="polyline.path[0].longitude"
+                    > 
+                    </agm-polyline-point> 
+
+                    <agm-polyline-point [agmFitBounds]="true" 
+                                        [latitude]="polyline.path[1].latitude" 
+                                        [longitude]="polyline.path[1].longitude"
+                    > 
+                    </agm-polyline-point> 
+
+                </ng-container>
+
            </agm-polyline> 
 
         </agm-map> 
         
     </div>
     <div class="col-6 ml-0">
-        <!-- <agm-map [latitude]="lat" [longitude]="lng">
-            <agm-marker [latitude]="lat" [longitude]="lng" ></agm-marker>
-        </agm-map>    -->
+
     </div>
 
 </div>
