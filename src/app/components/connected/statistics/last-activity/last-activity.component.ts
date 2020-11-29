@@ -1,17 +1,14 @@
-import { Component, Input, OnChanges, OnInit, AfterViewInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Activity } from '../../../../models/Activity';
 import { GeoPoint } from '../../../../models/GeoPoint';
-import { GoogleMapsAPIWrapper, AgmMap } from '@agm/core';
 import { Path } from '../../../../models/Path';
-import { Point } from '../../../../models/Point';
-
 
 @Component({
   selector: 'last-activity',
   templateUrl: './last-activity.component.html',
   styleUrls: ['./last-activity.component.scss']
 })
-export class LastActivityComponent implements OnInit, OnChanges, AfterViewInit {
+export class LastActivityComponent implements OnInit, OnChanges {
 
   @Input() lastActivity: Activity;
   @Input() lastActivityGeopoints: GeoPoint[];
@@ -58,47 +55,49 @@ export class LastActivityComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges() {
 
-    this.latStart = this.lastActivityGeopoints[0].latitude;
-    this.lngStart = this.lastActivityGeopoints[0].longitude;
+    if (this.lastActivity && this.lastActivityGeopoints) {
 
-    this.latStop = this.lastActivityGeopoints[this.lastActivityGeopoints.length - 1].latitude;
-    this.lngStop = this.lastActivityGeopoints[this.lastActivityGeopoints.length - 1].longitude;
-
-    this.iconUrlStart = {
-      url: 'http://www.multiform-music.net/i_feel_run1/icon_flag_start.png',
-      scaledSize: {
-        width: 30,
-        height: 30
+      this.latStart = this.lastActivityGeopoints[0].latitude;
+      this.lngStart = this.lastActivityGeopoints[0].longitude;
+  
+      this.latStop = this.lastActivityGeopoints[this.lastActivityGeopoints.length - 1].latitude;
+      this.lngStop = this.lastActivityGeopoints[this.lastActivityGeopoints.length - 1].longitude;
+  
+      this.iconUrlStart = {
+        url: 'https://firebasestorage.googleapis.com/v0/b/ifeelrunreactnat-1522147172488.appspot.com/o/icon_flag_start.png?alt=media&token=b32bd6d9-0a80-47d2-8788-9680ff25d546',
+        scaledSize: {
+          width: 30,
+          height: 30
+        }
       }
+  
+      this.iconUrlStop = {
+        url: 'https://firebasestorage.googleapis.com/v0/b/ifeelrunreactnat-1522147172488.appspot.com/o/icon_flag_stop.png?alt=media&token=1971e0ae-5c3b-4daf-ba86-40c35ddc2e2d',
+        scaledSize: {
+          width: 30,
+          height: 30
+        }
+      }
+  
+      this.speedMax05 = this.lastActivity.averageSpeed - (0.05*this.lastActivity.averageSpeed);
+      this.speedMax10 = (this.lastActivity.averageSpeed ) - (0.1*this.lastActivity.averageSpeed );
+      this.speedMax15 = (this.lastActivity.averageSpeed ) - (0.15*this.lastActivity.averageSpeed );
+      this.speedMax20 = (this.lastActivity.averageSpeed ) - (0.20*this.lastActivity.averageSpeed );
+      this.speedMax25 = (this.lastActivity.averageSpeed ) - (0.25*this.lastActivity.averageSpeed );
+      this.speedMax30 = (this.lastActivity.averageSpeed ) - (0.30*this.lastActivity.averageSpeed );
+      this.speedMax40 = (this.lastActivity.averageSpeed ) - (0.40*this.lastActivity.averageSpeed );
+      
+      this.constructPolylines();
+  
+      this.zoom = 10;
+      const interValZoom = setInterval(() => {
+        this.zoom = this.zoom + 1 ;
+            if (this.zoom > 14) {
+                clearInterval(interValZoom); 
+                }
+        }, 100);
     }
 
-    this.iconUrlStop = {
-      url: 'http://www.multiform-music.net/i_feel_run1/icon_flag_stop.png',
-      scaledSize: {
-        width: 30,
-        height: 30
-      }
-    }
-
-    this.speedMax05 = this.lastActivity.averageSpeed - (0.05*this.lastActivity.averageSpeed);
-    this.speedMax10 = (this.lastActivity.averageSpeed ) - (0.1*this.lastActivity.averageSpeed );
-    this.speedMax15 = (this.lastActivity.averageSpeed ) - (0.15*this.lastActivity.averageSpeed );
-    this.speedMax20 = (this.lastActivity.averageSpeed ) - (0.20*this.lastActivity.averageSpeed );
-    this.speedMax25 = (this.lastActivity.averageSpeed ) - (0.25*this.lastActivity.averageSpeed );
-    this.speedMax30 = (this.lastActivity.averageSpeed ) - (0.30*this.lastActivity.averageSpeed );
-    this.speedMax40 = (this.lastActivity.averageSpeed ) - (0.40*this.lastActivity.averageSpeed );
-    
-    this.constructPolylines();
-
-  }
-
-  ngAfterViewInit() {
-    const interValZoom = setInterval(() => {
-      this.zoom = this.zoom + 1 ;
-          if (this.zoom > 14) {
-              clearInterval(interValZoom); 
-              }
-      }, 100);
   }
 
   /**
@@ -128,10 +127,14 @@ export class LastActivityComponent implements OnInit, OnChanges, AfterViewInit {
 
     });
 
-    console.log(this.polylines);
-
   }
 
+  /**
+   * 
+   * Détermine la couleur de la polyline suivant vitesse
+   * 
+   * @param geopoint 
+   */
   private getPolylineColor(geopoint: GeoPoint): string {
 
 

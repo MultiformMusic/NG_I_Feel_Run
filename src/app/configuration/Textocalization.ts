@@ -58,5 +58,7 @@ export const TEXT_LOCALIZATION = {
     statisticsFrom_EN: 'from ',
     statisticsTo_FR: 'au ',
     statisticsTo_EN: 'to ',
+    statisticsStartingCity_FR: "Villes de départ",
+    statisticsStartingCity_EN: "Starting cities",
 
 }

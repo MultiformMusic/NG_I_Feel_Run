@@ -12,17 +12,7 @@ import { ActivityTypeStats } from '../models/ActivityTypeStats';
  */
 export const generateStatistics = (datas: [ActivityDoc]): ActivityTypeStats[] => {
 
-    let activitiesStats = [{}];
     let mapActivtiesByType = new Map();
-
-    /*const runnings = datas.filter(activity => activity.activityDoc.activityType === ActivitiesEnum.RUNNING);
-    mapActivtiesByType.set(ActivitiesEnum.RUNNING, runnings);
-    
-    const walkings = datas.filter(activity => activity.activityDoc.activityType === ActivitiesEnum.WALKING);
-    mapActivtiesByType.set(ActivitiesEnum.WALKING, walkings);
-
-    const cyclings = datas.filter(activity => activity.activityDoc.activityType === ActivitiesEnum.CYCLING);
-    mapActivtiesByType.set(ActivitiesEnum.CYCLING, cyclings);*/
 
     /** constuction map(type activité, tableau activité) */
     for (const data of datas) {
@@ -90,10 +80,10 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
     let totalCalories = 0;
     let totalTime = 0;
     let numberCompetition = 0;
-    let cityStarts: string[] = [];
     let maxDinivele = 0;
     let dateMin = '';
-    let dateMax = ''
+    let dateMax = '';
+    let mapCityStarts = new Map();
 
     for (const [i, activity] of activities.entries()) {
 
@@ -102,7 +92,12 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
         totalCalories += activity.calories ? activity.calories : 0;
         numberCompetition += activity.competition ? 1 : 0;
 
-        if (!cityStarts.includes(activity.cityStart)) cityStarts.push(activity.cityStart);
+        // map city starts
+        let value = 0;
+        if (mapCityStarts.get(activity.cityStart)) {
+            value = mapCityStarts.get(activity.cityStart);
+        } 
+        mapCityStarts.set(activity.cityStart, value+1);
 
         // temps
         totalTime = totalTime + convertDateStringToSeconds(activity.chrono);
@@ -119,7 +114,6 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
 
     }
 
-    cityStarts.sort();
     
     const averageDistance = parseFloat((totalDistance / activities.length).toFixed(1));
     const averageTime = Math.round(totalTime / activities.length);
@@ -129,13 +123,15 @@ const processActivities = (type: string, activities: [Activity]): ActivityTypeSt
 
     averageSpeed = totalDistance / totalTime;
 
+    mapCityStarts = new Map([...mapCityStarts.entries()].sort((a, b) => b[1] - a[1]));
+
     const activityTypeStats: ActivityTypeStats = {
 
         type,
         numberActivities,
         dateMin,
         dateMax,
-        cityStarts,
+        mapCityStarts,
         totalDistance,
         averageDistance,
         averageSpeed,

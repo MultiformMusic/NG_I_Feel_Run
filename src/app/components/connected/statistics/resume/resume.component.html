@@ -93,5 +93,13 @@
         </div>
 
       </div>
+      <div class="mt-2">
+        <app-localized-text text="statisticsStartingCity"></app-localized-text>
+        <div>
+        <span style="font-size: 0.8rem;" *ngFor="let item of activityDatas.mapCityStarts | keyvalue:orderbyValueDsc">
+            {{item.key}}: {{item.value}} <span> - </span>
+        </span>
+        </div>
+
     </div>
   </div>

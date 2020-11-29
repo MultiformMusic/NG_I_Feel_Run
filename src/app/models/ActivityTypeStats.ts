@@ -5,7 +5,7 @@ export interface ActivityTypeStats {
     numberActivities: number;
     dateMin: string;
     dateMax: string;
-    cityStarts: string[];
+    mapCityStarts: Map<string, number>;
     totalDistance: number;
     averageDistance: number;
     averageSpeed: number;
