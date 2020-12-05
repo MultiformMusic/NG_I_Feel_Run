@@ -14,4 +14,8 @@ export interface Activity {
     numberOfPoints: number;
     placeName: string;
     timeStartActivity: number;
+    weatherStartIcon: string;
+    weatherStartDescription: string;
+    weatherStartTemperature: number;
+    weatherStartHumidity: number;
 }

@@ -1,9 +1,10 @@
 
 <div class="card shadow-lg text-center container" style="background-color: transparent; height: 280px;">
 
-    <div class="col-6 ml-0">
-
+    <div class="col-6">
+            
         <agm-map [zoom]="zoom" [fitBounds]="true" [latitude]="latStart" [longitude]="lngStart" [mapTypeId]="'satellite'" [controlSize]='20'>
+            
             
             <agm-map-type-control></agm-map-type-control>
 
@@ -41,6 +42,11 @@
                 <app-converter [value]="lastActivity.date" type="date"></app-converter> - 
                 {{lastActivity.cityStart}}
                 <span *ngIf="lastActivity.placeName">({{lastActivity.placeName}})</span>
+            </div>
+            <div class="pb-2" style="font-size: 0.8rem; color: white;">
+                <span *ngIf="lastActivity.weatherStartTemperature">{{lastActivity.weatherStartTemperature}} °C </span>
+                <span *ngIf="lastActivity.weatherStartIcon"><img [src]="weahterIconUrl" style="width: 2rem;"/></span>
+                <span *ngIf="lastActivity.weatherStartDescription"> ({{lastActivity.weatherStartDescription}})</span>
             </div>
         </div>
 

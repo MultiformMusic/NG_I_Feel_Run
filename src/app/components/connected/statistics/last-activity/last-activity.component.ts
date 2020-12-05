@@ -48,6 +48,8 @@ export class LastActivityComponent implements OnInit, OnChanges {
 
   polylines: Path[] = [];
 
+  weahterIconUrl = "";
+
   constructor() { }
 
   ngOnInit(): void {
@@ -56,6 +58,8 @@ export class LastActivityComponent implements OnInit, OnChanges {
   ngOnChanges() {
 
     if (this.lastActivity && this.lastActivityGeopoints) {
+
+      this.weahterIconUrl = "http://openweathermap.org/img/wn/" + this.lastActivity.weatherStartIcon + ".png";
 
       this.latStart = this.lastActivityGeopoints[0].latitude;
       this.lngStart = this.lastActivityGeopoints[0].longitude;
