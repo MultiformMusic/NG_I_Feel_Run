@@ -55,6 +55,8 @@ export class ConverterComponent implements OnInit, OnChanges, OnDestroy {
       } else {
         this.convertValue = this.value; 
       }
+    } else if (this.type === "speedLast") {
+      this.convertValue = (parseFloat(this.value)).toFixed(2) + " " + this.units.speed;
     
     } else if (this.type === "date") {
       this.convertValue = this.value; 

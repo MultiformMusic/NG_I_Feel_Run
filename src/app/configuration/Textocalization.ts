@@ -60,5 +60,13 @@ export const TEXT_LOCALIZATION = {
     statisticsTo_EN: 'to ',
     statisticsStartingCity_FR: "Villes de départ",
     statisticsStartingCity_EN: "Starting cities",
+    statisticsLastActivity_FR: "Dernière activité",
+    statisticsLastActivity_EN: "Last activity",
+    statisticsDistance_FR: "Distance : ",
+    statisticsDistance_EN: "Distance : ",
+    statisticsSpeed_FR: "Vitesse : ",
+    statisticsSpeed_EN: "Speed : ",
+    statisticsTime_FR: "Temps : ",
+    statisticsTime_EN: "Time : ",
 
 }

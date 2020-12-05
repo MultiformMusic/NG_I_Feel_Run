@@ -34,6 +34,61 @@
         
     </div>
     <div class="col-6 ml-0">
+        <div class="text-title">
+            <h5><app-localized-text text="statisticsLastActivity"></app-localized-text></h5>
+
+            <div class="pb-2" style="font-size: 0.8rem; color: white;">
+                <app-converter [value]="lastActivity.date" type="date"></app-converter> - 
+                {{lastActivity.cityStart}}
+                <span *ngIf="lastActivity.placeName">({{lastActivity.placeName}})</span>
+            </div>
+        </div>
+
+        <div class="column">
+            
+        
+        </div>
+        <div class="row">
+            <div class="col-6 p-1">
+                <span class=text-title>
+                    <app-localized-text text="statisticsDistance"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    <app-converter [value]="lastActivity.distance" type="distance"></app-converter>
+                </span>
+            </div>
+            <div class="col-6 p-1">
+                <span class=text-title>
+                    <app-localized-text text="statisticsSpeed"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    <app-converter [value]="lastActivity.averageSpeed" type="speedLast"></app-converter>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 p-1">
+                <span class=text-title>
+                    <app-localized-text text="statisticsTime"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    {{lastActivity.chrono}}
+                </span>
+            </div>
+            <div class="col-6 p-1">
+                <span class=text-title>
+                    <app-localized-text text="statisticsCalories"></app-localized-text>
+                </span>
+                <span class="text-value">
+                    {{lastActivity.calories}}
+                </span>
+            </div>
+        </div>
+        <div class="row justify-content-center pt-3">
+            <span class="text-value" style="color: white; font-size: .9rem;">
+                {{lastActivity.comment}}
+            </span>
+        </div>
 
     </div>
 
