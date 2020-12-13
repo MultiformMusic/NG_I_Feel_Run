@@ -61,7 +61,8 @@ export class ConverterComponent implements OnInit, OnChanges, OnDestroy {
     } else if (this.type === "date") {
       this.convertValue = this.value; 
       return this.convertValue;
-    }
+
+    } 
   }
 
   ngOnDestroy(): void {

@@ -18,4 +18,6 @@ export interface Activity {
     weatherStartDescription: string;
     weatherStartTemperature: number;
     weatherStartHumidity: number;
+    weatherStartWindSpeed: number;
+    weatherStartWindDeg: number;
 }

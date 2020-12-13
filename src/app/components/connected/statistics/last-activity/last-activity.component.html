@@ -47,6 +47,33 @@
                 <span *ngIf="lastActivity.weatherStartTemperature">{{lastActivity.weatherStartTemperature}} °C </span>
                 <span *ngIf="lastActivity.weatherStartIcon"><img [src]="weahterIconUrl" style="width: 2rem;"/></span>
                 <span *ngIf="lastActivity.weatherStartDescription"> ({{lastActivity.weatherStartDescription}})</span>
+                <span *ngIf="lastActivity.weatherStartWindSpeed"> 
+                    - <app-converter [value]="lastActivity.weatherStartWindSpeed" type="speed"></app-converter>
+                        <span *ngIf="weatherWindOrientation === 'N' ">
+                            <app-localized-text text="statisticsWindNorth"></app-localized-text>
+                        </span>
+                        <span *ngIf="weatherWindOrientation === 'NE' ">
+                            <app-localized-text text="statisticsWindNorthEast"></app-localized-text>
+                        </span>
+                        <span *ngIf="weatherWindOrientation === 'E' ">
+                            <app-localized-text text="statisticsWindEast"></app-localized-text>
+                        </span>
+                        <span *ngIf="weatherWindOrientation === 'SE' ">
+                            <app-localized-text text="statisticsWindSouthEast"></app-localized-text>
+                        </span>
+                        <span *ngIf="weatherWindOrientation === 'S' ">
+                            <app-localized-text text="statisticsWindSouth"></app-localized-text>
+                        </span>
+                        <span *ngIf="weatherWindOrientation === 'SW' ">
+                            <app-localized-text text="statisticsWindSouthWest"></app-localized-text>
+                        </span>
+                        <span *ngIf="weatherWindOrientation === 'W' ">
+                            <app-localized-text text="statisticsWindWest"></app-localized-text>
+                        </span>
+                        <span *ngIf="weatherWindOrientation === 'NW' ">
+                            <app-localized-text text="statisticsWindNorthWest"></app-localized-text>
+                        </span>
+                </span>
             </div>
         </div>
 

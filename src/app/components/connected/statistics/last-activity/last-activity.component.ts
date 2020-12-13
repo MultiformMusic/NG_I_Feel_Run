@@ -49,6 +49,7 @@ export class LastActivityComponent implements OnInit, OnChanges {
   polylines: Path[] = [];
 
   weahterIconUrl = "";
+  weatherWindOrientation = "";
 
   constructor() { }
 
@@ -60,6 +61,28 @@ export class LastActivityComponent implements OnInit, OnChanges {
     if (this.lastActivity && this.lastActivityGeopoints) {
 
       this.weahterIconUrl = "http://openweathermap.org/img/wn/" + this.lastActivity.weatherStartIcon + ".png";
+
+      // détermination orientation du vent
+      const windDeg = this.lastActivity.weatherStartWindDeg;
+      if (windDeg > 337.5 && windDeg < 360) {
+        this.weatherWindOrientation = "N";
+      } else if (windDeg >= 0 && windDeg < 22.5) {
+        this.weatherWindOrientation = "N";
+      } else if (windDeg >= 22.5 && windDeg < 67.5) {
+        this.weatherWindOrientation = "NE";
+      } else if (windDeg >= 67.5 && windDeg < 112.5) {
+        this.weatherWindOrientation = "E";
+      } else if (windDeg >= 112.5 && windDeg < 157.5) {
+        this.weatherWindOrientation = "SE";
+      } else if (windDeg >= 157.5 && windDeg < 202.5) {
+        this.weatherWindOrientation = "S";
+      } else if (windDeg >= 202.5 && windDeg < 247.5) {
+        this.weatherWindOrientation = "SW";
+      } else if (windDeg >= 247.5 && windDeg < 292.5) {
+        this.weatherWindOrientation = "W";
+      } else if (windDeg >= 292.5 && windDeg < 337.5) {
+        this.weatherWindOrientation = "NW";
+      }
 
       this.latStart = this.lastActivityGeopoints[0].latitude;
       this.lngStart = this.lastActivityGeopoints[0].longitude;
